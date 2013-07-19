@@ -81,6 +81,8 @@ void IntArray::insertIntAtIndex(int index, int value)
     data_ = tempdata;
 }
 
+
+
 void IntArray::setIntAtIndex(int index, int value)
 {
     int length = data_ == nil ? 0 : data_ -> length;
