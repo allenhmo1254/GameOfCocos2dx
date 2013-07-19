@@ -57,7 +57,7 @@ static CCObject* createClass(const char* className)
     }
     switch (typeId) {
         case class_GameContent:
-            obj =  GameContent::Create(className);//Teach::Create(className);
+//            obj =  GameContent::Create(className);//Teach::Create(className);
             break;
         default:
             CCLOG("无效返回 typeId = %d",typeId);

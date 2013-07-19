@@ -17,6 +17,8 @@ class IntArray : public cocos2d::CCObject {
 protected:
     Int1DArray data_;
 public:
+    virtual bool init();
+    
     CREATE_FUNC(IntArray);
     
     IntArray();

@@ -21,6 +21,12 @@ IntArray::~IntArray()
 }
 
 
+bool IntArray::init()
+{
+    return true;
+}
+
+
 int IntArray::count()
 {
     if (!data_) {
