@@ -7,7 +7,7 @@
 //
 
 #include "GameSceneManager.h"
-
+#include "../PublicData/PublicDataManager.h"
 
 static GameSceneManager* gameSceneManager_;
 
@@ -29,5 +29,6 @@ void GameSceneManager::clearGameSceneManager()
 
 void GameSceneManager::init()
 {
-    
+    PublicDataManager::sharedPublicDataManager();
 }
+

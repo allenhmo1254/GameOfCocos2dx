@@ -12,6 +12,19 @@
 #include <iostream>
 #include "cocos2d.h"
 
+
+typedef enum{
+    GameType_Normal = 0,      //普通
+    GameType_Reverse,         //反向
+}GameType; //游戏类型
+
+
+typedef enum{
+    GameState_Normal = 0,     //正常状态
+    GameState_Finish,         //游戏结束
+}GameState;//游戏状态
+
+
 class GameSceneManager : public cocos2d::CCObject
 {
 public:

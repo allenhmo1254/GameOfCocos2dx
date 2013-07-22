@@ -7,6 +7,8 @@
 //
 
 #include "PublicDataManager.h"
+#include "PublicDatas.h"
+
 
 static PublicDataManager* publicDataManager_;
 
@@ -29,5 +31,6 @@ void PublicDataManager::clearPublicDataManager()
 
 void PublicDataManager::init()
 {
-    
+    GameConstant::sharedGameConstant();
+    CheckPointData::sharedCheckPointData();
 }

@@ -7,7 +7,8 @@
 //
 
 #include "GameScene.h"
-
+#include "GameSceneManager.h"
+#include "../PublicData/PublicDatas.h"
 
 using namespace cocos2d;
 
@@ -37,14 +38,15 @@ bool GameScene::init()
         return false;
     }
     
-    CCSize screenSize = CCDirector::sharedDirector() -> getWinSize();
-    
-    CCLabelTTF *sceneLabel = CCLabelTTF::create("游戏界面", "AppleGothic", 30);
-    
-    addChild(sceneLabel);
-    
-    sceneLabel -> setPosition(ccp(screenSize.width / 2,screenSize.height / 2));
+    gameSceneManager_ = GameSceneManager::sharedGameSceneManager();
     
     
     return true;
 }
+
+
+void GameScene::initMainImage()
+{
+    
+}
+

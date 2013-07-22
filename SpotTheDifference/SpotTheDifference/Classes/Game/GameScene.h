@@ -12,8 +12,11 @@
 #include <iostream>
 #include "cocos2d.h"
 
+class GameSceneManager;
 class GameScene : public cocos2d::CCLayer
 {
+protected:
+    GameSceneManager *gameSceneManager_;
 public:
     // Method 'init' in cocos2d-x returns bool, instead of 'id' in cocos2d-iphone (an object pointer)
     virtual bool init();
@@ -23,6 +26,8 @@ public:
     
     // preprocessor macro for "static create()" constructor ( node() deprecated )
     CREATE_FUNC(GameScene);
+    
+    void initMainImage();
 };
 
 #endif /* defined(__SpotTheDifference__GameScene__) */

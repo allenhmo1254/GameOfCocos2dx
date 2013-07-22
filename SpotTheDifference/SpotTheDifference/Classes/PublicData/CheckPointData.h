@@ -18,12 +18,19 @@ using namespace cocos2d;
 class CheckPointData : public CCObject {
 public:
     CC_SYNTHESIZE_READONLY(IntArray *, levelKeyId_, LevelKeyId);
-    
+    CC_SYNTHESIZE_READONLY(CCDictionary *, mainImageFile_, MainImageFile);
+    CC_SYNTHESIZE_READONLY(CCDictionary *, differentImageFile_, DifferentImageFile);
 public:
     static CheckPointData* sharedCheckPointData();
     static void clearCheckPointData();
     
+    CheckPointData();
+    ~CheckPointData();
+    
     void init();
+    
+    void initMainImageFile();
+    void initDifferentImageFile();
 };
 
 #endif /* defined(__SpotTheDifference__CheckPointData__) */

@@ -9,7 +9,7 @@
 #ifndef SpotTheDifference_PublicDatas_h
 #define SpotTheDifference_PublicDatas_h
 
-#include "PublicDataManager.h"
 #include "GameConstant.h"
+#include "CheckPointData.h"
 
 #endif
