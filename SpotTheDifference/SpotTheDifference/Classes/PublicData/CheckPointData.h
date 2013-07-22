@@ -20,6 +20,7 @@ public:
     CC_SYNTHESIZE_READONLY(IntArray *, levelKeyId_, LevelKeyId);
     CC_SYNTHESIZE_READONLY(CCDictionary *, mainImageFile_, MainImageFile);
     CC_SYNTHESIZE_READONLY(CCDictionary *, differentImageFile_, DifferentImageFile);
+    CC_SYNTHESIZE_READONLY(CCDictionary *, differentImagePos_, DifferentImagePos);
 public:
     static CheckPointData* sharedCheckPointData();
     static void clearCheckPointData();
@@ -31,6 +32,7 @@ public:
     
     void initMainImageFile();
     void initDifferentImageFile();
+    void initDifferentImagePos();
 };
 
 #endif /* defined(__SpotTheDifference__CheckPointData__) */

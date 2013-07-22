@@ -7,7 +7,9 @@
 //
 
 #include "CheckPointData.h"
+#include "extension.h"
 
+using namespace extension;
 
 static CheckPointData* checkPointData_;
 
@@ -80,5 +82,21 @@ void CheckPointData::initDifferentImageFile()
         tempArray -> addObject(string);
     }
     differentImageFile_ -> setObject(tempArray, "1001");
+}
+
+
+void CheckPointData::initDifferentImagePos()
+{
+    differentImagePos_ = CCDictionary::create();
+    differentImagePos_ -> retain();
+    
+    
+    CCArray *tempArray = CCArray::createWithCapacity(7);
+    for (int i = 0; i < 7; i ++) {
+        CCPoint pos = ccp(100, 100);
+        CCBValue *value = CCBValue::valueWithCCPoint(pos);
+        tempArray -> addObject(value);
+    }
+    differentImagePos_ -> setObject(tempArray, "1001");
 }
 

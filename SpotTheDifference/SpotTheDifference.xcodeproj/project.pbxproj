@@ -273,6 +273,8 @@
 		1DBD7862179825EB005CEED6 /* ChooseGameScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1DBD7860179825EB005CEED6 /* ChooseGameScene.cpp */; };
 		1DBD786517982868005CEED6 /* GameSceneManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1DBD786317982868005CEED6 /* GameSceneManager.cpp */; };
 		1DBD7868179829B0005CEED6 /* PublicDataManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1DBD7866179829B0005CEED6 /* PublicDataManager.cpp */; };
+		1DD1743B179D71EF00A67344 /* GameSprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1DD17439179D71EF00A67344 /* GameSprite.cpp */; };
+		1DD1743E179D806F00A67344 /* DifferentSprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1DD1743C179D806E00A67344 /* DifferentSprite.cpp */; };
 		E577204F1798D1A200ACA9A2 /* ClassCreate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E57720471798D1A200ACA9A2 /* ClassCreate.cpp */; };
 		E57720501798D1A200ACA9A2 /* ClassInclude.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E57720491798D1A200ACA9A2 /* ClassInclude.cpp */; };
 		E57720511798D1A200ACA9A2 /* Define.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E577204B1798D1A200ACA9A2 /* Define.cpp */; };
@@ -871,6 +873,10 @@
 		1DBD7866179829B0005CEED6 /* PublicDataManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PublicDataManager.cpp; sourceTree = "<group>"; };
 		1DBD7867179829B0005CEED6 /* PublicDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PublicDataManager.h; sourceTree = "<group>"; };
 		1DBD786917982A0B005CEED6 /* PublicDatas.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PublicDatas.h; sourceTree = "<group>"; };
+		1DD17439179D71EF00A67344 /* GameSprite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameSprite.cpp; sourceTree = "<group>"; };
+		1DD1743A179D71EF00A67344 /* GameSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameSprite.h; sourceTree = "<group>"; };
+		1DD1743C179D806E00A67344 /* DifferentSprite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DifferentSprite.cpp; sourceTree = "<group>"; };
+		1DD1743D179D806F00A67344 /* DifferentSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DifferentSprite.h; sourceTree = "<group>"; };
 		E57720461798D1A100ACA9A2 /* ClassByName.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClassByName.h; sourceTree = "<group>"; };
 		E57720471798D1A200ACA9A2 /* ClassCreate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ClassCreate.cpp; sourceTree = "<group>"; };
 		E57720481798D1A200ACA9A2 /* ClassCreate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClassCreate.h; sourceTree = "<group>"; };
@@ -2084,6 +2090,10 @@
 				1DBD785E17982485005CEED6 /* GameScene.h */,
 				1DBD786317982868005CEED6 /* GameSceneManager.cpp */,
 				1DBD786417982868005CEED6 /* GameSceneManager.h */,
+				1DD17439179D71EF00A67344 /* GameSprite.cpp */,
+				1DD1743A179D71EF00A67344 /* GameSprite.h */,
+				1DD1743C179D806E00A67344 /* DifferentSprite.cpp */,
+				1DD1743D179D806F00A67344 /* DifferentSprite.h */,
 			);
 			name = Game;
 			path = Classes/Game;
@@ -2488,6 +2498,8 @@
 				E57720591798D86A00ACA9A2 /* IntArray.cpp in Sources */,
 				E577205C1798E21100ACA9A2 /* ActionData.cpp in Sources */,
 				F0474656179D17BF00B3D216 /* CheckPointData.cpp in Sources */,
+				1DD1743B179D71EF00A67344 /* GameSprite.cpp in Sources */,
+				1DD1743E179D806F00A67344 /* DifferentSprite.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
