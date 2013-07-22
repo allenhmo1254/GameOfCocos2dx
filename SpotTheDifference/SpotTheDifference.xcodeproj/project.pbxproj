@@ -280,6 +280,7 @@
 		E57720551798D23F00ACA9A2 /* DataInputStream.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E57720531798D23F00ACA9A2 /* DataInputStream.cpp */; };
 		E57720591798D86A00ACA9A2 /* IntArray.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E57720571798D86900ACA9A2 /* IntArray.cpp */; };
 		E577205C1798E21100ACA9A2 /* ActionData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E577205A1798E21100ACA9A2 /* ActionData.cpp */; };
+		F0474656179D17BF00B3D216 /* CheckPointData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F0474654179D17BF00B3D216 /* CheckPointData.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -879,6 +880,8 @@
 		E577205A1798E21100ACA9A2 /* ActionData.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ActionData.cpp; sourceTree = "<group>"; };
 		E577205B1798E21100ACA9A2 /* ActionData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionData.h; sourceTree = "<group>"; };
 		E577205D1798E78300ACA9A2 /* CCRange.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCRange.h; sourceTree = "<group>"; };
+		F0474654179D17BF00B3D216 /* CheckPointData.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CheckPointData.cpp; sourceTree = "<group>"; };
+		F0474655179D17BF00B3D216 /* CheckPointData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckPointData.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -2080,6 +2083,8 @@
 				1DBD7867179829B0005CEED6 /* PublicDataManager.h */,
 				1DBD786917982A0B005CEED6 /* PublicDatas.h */,
 				E57720561798D64300ACA9A2 /* BaseData.h */,
+				F0474654179D17BF00B3D216 /* CheckPointData.cpp */,
+				F0474655179D17BF00B3D216 /* CheckPointData.h */,
 			);
 			name = PublicData;
 			path = Classes/PublicData;
@@ -2441,6 +2446,7 @@
 				E57720551798D23F00ACA9A2 /* DataInputStream.cpp in Sources */,
 				E57720591798D86A00ACA9A2 /* IntArray.cpp in Sources */,
 				E577205C1798E21100ACA9A2 /* ActionData.cpp in Sources */,
+				F0474656179D17BF00B3D216 /* CheckPointData.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
