@@ -9,6 +9,8 @@
 #include "GameSprite.h"
 #include "../PublicData/PublicDatas.h"
 #include "extension.h"
+#include "DifferentSprite.h"
+#include "GameSceneManager.h"
 
 using namespace extension;
 
@@ -17,7 +19,7 @@ GameSprite::GameSprite()
 :differentSpriteArray_(NULL),
 isShowDifferent_(false)
 {
-    
+    gameSceneManager_ = GameSceneManager::sharedGameSceneManager();
 }
 
 
@@ -26,6 +28,8 @@ GameSprite::~GameSprite()
     differentSpriteArray_ -> removeAllObjects();
     differentSpriteArray_ -> release();
     differentSpriteArray_ = NULL;
+    
+    gameSceneManager_ = NULL;
 }
 
 
@@ -76,10 +80,12 @@ void GameSprite::initGameSprite(const char *name, bool isShowDifferent)
         for (int i = 0, count = differentSpriteFileArray -> count(); i < count; i ++) {
             CCString *differentSpriteFile = (CCString *)differentSpriteFileArray -> objectAtIndex(i);
             CCPoint differentSpritePos = ((CCBValue *)differentSpritePosArray -> objectAtIndex(i)) -> getCCPointValue();
-            CCSprite *differentSprite = CCSprite::create(differentSpriteFile -> getCString());
+            DifferentSprite *differentSprite = DifferentSprite::create(differentSpriteFile -> getCString());
             addChild(differentSprite);
             differentSprite -> setPosition(differentSpritePos);
-            differentSprite -> setVisible(isShowDifferent_);
+            if (!isShowDifferent_) {
+                differentSprite -> setOpacity(0);
+            }
             differentSpriteArray_ -> addObject(differentSprite);
         }
     }
@@ -89,18 +95,18 @@ void GameSprite::initGameSprite(const char *name, bool isShowDifferent)
 bool GameSprite::ccTouchBegan(CCTouch *pTouch, CCEvent *pEvent)
 {
     CCPoint point = CCDirector::sharedDirector() -> convertToGL(pTouch -> getLocationInView());
-    
+    checkDifferentSprite(point);
     return true;
 }
 
 void GameSprite::ccTouchMoved(CCTouch *pTouch, CCEvent *pEvent)
 {
-    CCLOG("ccTouchMoved");
+//    CCLOG("ccTouchMoved");
 }
 
 void GameSprite::ccTouchEnded(CCTouch *pTouch, CCEvent *pEvent)
 {
-    CCPoint endPoint = CCDirector::sharedDirector() -> convertToGL(pTouch -> getLocationInView());
+//    CCPoint endPoint = CCDirector::sharedDirector() -> convertToGL(pTouch -> getLocationInView());
     
 }
 
@@ -108,10 +114,31 @@ void GameSprite::ccTouchEnded(CCTouch *pTouch, CCEvent *pEvent)
 void GameSprite::checkDifferentSprite(CCPoint pos)
 {
     for (int i = 0; i < differentSpriteNum_; i ++) {
-        CCSprite *sprite = (CCSprite *)differentSpriteArray_ -> objectAtIndex(i);
+        DifferentSprite *sprite = (DifferentSprite *)differentSpriteArray_ -> objectAtIndex(i);
         CCRect rect = CCRectMake(sprite -> getPosition().x, sprite -> getPosition().y, sprite -> getContentSize().width, sprite -> getContentSize().height);
-        
+        if (rect.containsPoint(pos) && !sprite -> getIsShowCircle()) {
+            gameSceneManager_ -> setGameSpriteShowCircle(i);
+            break;
+        }
     }
 }
 
 
+void GameSprite::showCircleWithIndex(int index)
+{
+    DifferentSprite *sprite = (DifferentSprite *)differentSpriteArray_ -> objectAtIndex(index);
+    sprite -> setIsShowCircle(true);
+}
+
+
+void GameSprite::onEnter()
+{
+	CCLayer::onEnter();
+	CCDirector::sharedDirector()->getTouchDispatcher()->addTargetedDelegate(this, 1, false);
+}
+
+void GameSprite::onExit()
+{
+	CCDirector::sharedDirector()->getTouchDispatcher()->removeDelegate(this);
+	CCLayer::onExit();
+}

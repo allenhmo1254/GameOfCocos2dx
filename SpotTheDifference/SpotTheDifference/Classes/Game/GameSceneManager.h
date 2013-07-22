@@ -28,10 +28,21 @@ typedef enum{
 class GameSceneManager : public cocos2d::CCObject
 {
 public:
+    CC_SYNTHESIZE(cocos2d::CCArray *, gameSpriteArray_, GameSpriteArray);
+    CC_SYNTHESIZE(int, currentFoundNum_, CurrentFoundNum);
+    CC_SYNTHESIZE(int, needFoundNum_, NeedFoundNum);
+public:
     static GameSceneManager* sharedGameSceneManager();
     static void clearGameSceneManager();
     
+    GameSceneManager();
+    ~GameSceneManager();
+    
     void init();
+    
+    void initGameSpriteArray();
+    
+    void setGameSpriteShowCircle(int index);
 };
 
 #endif /* defined(__SpotTheDifference__GameSceneManager__) */

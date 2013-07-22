@@ -9,6 +9,7 @@
 #include "GameScene.h"
 #include "GameSceneManager.h"
 #include "../PublicData/PublicDatas.h"
+#include "DifferentSprite.h"
 
 using namespace cocos2d;
 
@@ -40,6 +41,11 @@ bool GameScene::init()
     
     gameSceneManager_ = GameSceneManager::sharedGameSceneManager();
     
+    DifferentSprite *sp = DifferentSprite::create("Icon.png");
+    sp -> setPosition(ccp(100, 100));
+    addChild(sp);
+    sp -> setOpacity(0);
+    sp -> setIsShowCircle(true);
     
     return true;
 }

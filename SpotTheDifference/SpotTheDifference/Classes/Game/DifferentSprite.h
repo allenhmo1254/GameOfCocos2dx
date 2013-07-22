@@ -13,14 +13,13 @@
 #include "cocos2d.h"
 
 class DifferentSprite : public cocos2d::CCSprite {
+protected:
+    bool isShowCircle_;
 public:
-    CC_SYNTHESIZE(bool , isShowCircle_, IsShowCircle);
-public:
-    DifferentSprite();
-    ~DifferentSprite();
+    static DifferentSprite *create(const char *name);
     
-    CREATE_FUNC(DifferentSprite);
-    
+    void setIsShowCircle(bool state);
+    bool getIsShowCircle();
 };
 
 #endif /* defined(__SpotTheDifference__DifferentSprite__) */

@@ -8,6 +8,7 @@
 
 #include "GameSceneManager.h"
 #include "../PublicData/PublicDataManager.h"
+#include "GameSprite.h"
 
 static GameSceneManager* gameSceneManager_;
 
@@ -27,8 +28,44 @@ void GameSceneManager::clearGameSceneManager()
 }
 
 
+GameSceneManager::GameSceneManager()
+:gameSpriteArray_(NULL),
+currentFoundNum_(0),
+needFoundNum_(0)
+{
+    
+}
+
+
+GameSceneManager::~GameSceneManager()
+{
+    gameSpriteArray_ -> removeAllObjects();
+    gameSpriteArray_ -> release();
+    gameSpriteArray_ = NULL;
+}
+
+
 void GameSceneManager::init()
 {
     PublicDataManager::sharedPublicDataManager();
 }
 
+
+void GameSceneManager::initGameSpriteArray()
+{
+    gameSpriteArray_ = CCArray::createWithCapacity(2);
+    gameSpriteArray_ -> retain();
+}
+
+
+void GameSceneManager::setGameSpriteShowCircle(int index)
+{
+    for (int i = 0, count = gameSpriteArray_ -> count(); i < count; i ++) {
+        GameSprite *sprite = (GameSprite *)gameSpriteArray_ -> objectAtIndex(i);
+        sprite -> showCircleWithIndex(index);
+    }
+    currentFoundNum_ ++;
+    if (currentFoundNum_ >= needFoundNum_) {
+        
+    }
+}

@@ -12,11 +12,14 @@
 #include <iostream>
 #include "cocos2d.h"
 
+class GameSceneManager;
 class GameSprite : public cocos2d::CCLayer {
+protected:
+    GameSceneManager *gameSceneManager_;
 public:
-    CC_SYNTHESIZE(cocos2d::CCArray *, differentSpriteArray_, DifferentSpriteArray);
+    CC_SYNTHESIZE_READONLY(cocos2d::CCArray *, differentSpriteArray_, DifferentSpriteArray);
     CC_SYNTHESIZE(bool , isShowDifferent_, IsShowDifferent);
-    CC_SYNTHESIZE(int , differentSpriteNum_, DifferentSpriteNum);
+    CC_SYNTHESIZE_READONLY(int , differentSpriteNum_, DifferentSpriteNum);
 public:
     GameSprite();
     ~GameSprite();
@@ -34,6 +37,11 @@ public:
 	virtual void ccTouchEnded(cocos2d::CCTouch *pTouch, cocos2d::CCEvent *pEvent);
     //检测不用的精灵
     void checkDifferentSprite(cocos2d::CCPoint pos);
+    //按照索引显示不同精灵的圆圈
+    void showCircleWithIndex(int index);
+    //加载和退出时调用的函数
+    void onEnter();
+    void onExit();
 };
 
 #endif /* defined(__SpotTheDifference__GameSprite__) */

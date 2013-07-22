@@ -8,6 +8,7 @@
 
 #include "MainMenuScene.h"
 #include "../UiScene/ChooseLevelScene.h"
+#include "../Game/GameScene.h"
 
 using namespace cocos2d;
 
@@ -63,7 +64,7 @@ bool MainMenuScene::init()
 
 void MainMenuScene::startGame(CCObject* pSender)
 {
-    CCDirector::sharedDirector() -> replaceScene(ChooseLevelScene::scene());
+    CCDirector::sharedDirector() -> replaceScene(GameScene::scene());
 }
 
 
