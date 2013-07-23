@@ -12,16 +12,25 @@
 #include <iostream>
 #include "cocos2d.h"
 
+class GameSpriteProtocol
+{
+public:
+    virtual void gameSpriteTouchPressed(int index) = 0;
+};
+
+
 class GameSceneManager;
 class GameSprite : public cocos2d::CCLayer {
 protected:
-    GameSceneManager *gameSceneManager_;
     const char *name_;
     bool flipX_;
     bool flipY_;
     cocos2d::CCSprite *mainSprite_;
     cocos2d::CCSize mainSpriteSize_;
+    cocos2d::CCPoint startPos_;
+//    GameSpriteTouch *gameSpriteTouch_;
 public:
+    CC_SYNTHESIZE(GameSpriteProtocol *, gameSpriteProtocol_, GameSpriteProtocol);
     CC_SYNTHESIZE_READONLY(cocos2d::CCArray *, differentSpriteArray_, DifferentSpriteArray);
     CC_SYNTHESIZE(bool , isShowDifferent_, IsShowDifferent);
     CC_SYNTHESIZE_READONLY(int , differentSpriteNum_, DifferentSpriteNum);
@@ -54,6 +63,12 @@ public:
     void setFlipY(bool state);
     //得到精灵的Rect
     cocos2d::CCRect getGameSpriteRect(cocos2d::CCSprite *sprite);
+    //设置锚点
+    virtual void setAnchorPoint(const cocos2d::CCPoint& anchor);
+    //重置精灵的坐标
+    void resetSpritePos();
+    
+    virtual void draw(void);
 
 };
 

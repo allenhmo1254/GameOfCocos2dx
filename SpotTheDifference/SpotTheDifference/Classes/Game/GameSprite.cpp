@@ -17,9 +17,11 @@ using namespace extension;
 
 GameSprite::GameSprite()
 :differentSpriteArray_(NULL),
-isShowDifferent_(false)
+isShowDifferent_(false),
+gameSpriteProtocol_(NULL),
+differentSpriteNum_(0)
 {
-    gameSceneManager_ = GameSceneManager::sharedGameSceneManager();
+    
 }
 
 
@@ -29,7 +31,6 @@ GameSprite::~GameSprite()
     differentSpriteArray_ -> release();
     differentSpriteArray_ = NULL;
     
-    gameSceneManager_ = NULL;
 }
 
 
@@ -77,7 +78,7 @@ void GameSprite::initGameSprite(const char *name, bool isShowDifferent)
     isShowDifferent_ = isShowDifferent;
     if (mainSpriteFile) {
         mainSprite_ = CCSprite::create(mainSpriteFile -> getCString());
-        addChild(mainSprite_);
+        addChild(mainSprite_, -2);
         mainSprite_ -> setAnchorPoint(CCPointZero);
         mainSprite_ -> setPosition(CCPointZero);
         CCArray *differentSpriteFileArray = (CCArray *)CheckPointData::sharedCheckPointData() -> getDifferentImageFile() -> objectForKey(name);
@@ -88,7 +89,7 @@ void GameSprite::initGameSprite(const char *name, bool isShowDifferent)
             CCPoint differentSpritePos = ((CCBValue *)differentSpritePosArray -> objectAtIndex(i)) -> getCCPointValue();
             DifferentSprite *differentSprite = DifferentSprite::create(differentSpriteFile -> getCString());
             differentSpriteArray_ -> addObject(differentSprite);
-            addChild(differentSprite);
+            addChild(differentSprite, -1);
             differentSprite -> setAnchorPoint(ccp(0,1));
             differentSprite -> setPosition(ccp(differentSpritePos.x / CC_CONTENT_SCALE_FACTOR(),mainSpriteSize_.height - differentSpritePos.y / CC_CONTENT_SCALE_FACTOR()));
             if (!isShowDifferent_) {
@@ -101,7 +102,7 @@ void GameSprite::initGameSprite(const char *name, bool isShowDifferent)
 
 bool GameSprite::ccTouchBegan(CCTouch *pTouch, CCEvent *pEvent)
 {
-    CCPoint point = CCDirector::sharedDirector() -> convertToGL(pTouch -> getLocationInView());
+    CCPoint point = pTouch -> getLocation();
     checkDifferentSprite(point);
     return true;
 }
@@ -118,15 +119,28 @@ void GameSprite::ccTouchEnded(CCTouch *pTouch, CCEvent *pEvent)
 }
 
 
+void GameSprite::draw()
+{
+    for (int i = 0; i < differentSpriteNum_; i ++) {
+        DifferentSprite *sprite = (DifferentSprite *)differentSpriteArray_ -> objectAtIndex(i);
+        CCRect rect = getGameSpriteRect(sprite);
+        ccDrawRect(rect.origin, ccp(rect.origin.x + rect.size.width, rect.origin.y + rect.size.height));
+    }
+}
+
+
 void GameSprite::checkDifferentSprite(CCPoint pos)
 {
     CCLOG("pos.x = %f,pos.y = %f",pos.x,pos.y);
+    CCLOG("getPositionX() = %f, getPositionY() = %f",getPositionX(), getPositionY());
     for (int i = 0; i < differentSpriteNum_; i ++) {
         DifferentSprite *sprite = (DifferentSprite *)differentSpriteArray_ -> objectAtIndex(i);
         CCRect rect = getGameSpriteRect(sprite);
         CCLOG("rect.origin.x = %f,rect.origin.y = %f,rect.size.width = %f,rect.size.height = %f",rect.origin.x,rect.origin.y,rect.size.width,rect.size.height);
         if (rect.containsPoint(pos) && !sprite -> getIsShowCircle()) {
-            gameSceneManager_ -> setGameSpriteShowCircle(i);
+            if (gameSpriteProtocol_) {
+                gameSpriteProtocol_ -> gameSpriteTouchPressed(i);
+            }
             break;
         }
     }
@@ -205,7 +219,25 @@ CCRect GameSprite::getGameSpriteRect(CCSprite *sprite)
     float y = flipY_ == true ? sprite -> getPosition().y : sprite -> getPosition().y - sprite -> getContentSize().height;
     float width = sprite -> getContentSize().width;
     float height = sprite -> getContentSize().height;
-    return CCRectMake(x, y, width, height);
+    return CCRectMake(x + getPositionX(), y + getPositionY(), width, height);
 }
 
+
+
+void GameSprite::setAnchorPoint(const CCPoint& anchor)
+{
+    CCNode::setAnchorPoint(anchor);
+    startPos_ = ccp(-anchor.x * mainSpriteSize_.width, -anchor.y * mainSpriteSize_.height);
+    resetSpritePos();
+}
+
+
+void GameSprite::resetSpritePos()
+{
+    mainSprite_ -> setPosition(ccpAdd(startPos_, mainSprite_ -> getPosition()));
+    for (int i = 0; i < differentSpriteNum_; i ++) {
+        DifferentSprite *sprite = (DifferentSprite *)differentSpriteArray_ -> objectAtIndex(i);
+        sprite -> setPosition(ccpAdd(startPos_, sprite -> getPosition()));
+    }
+}
 

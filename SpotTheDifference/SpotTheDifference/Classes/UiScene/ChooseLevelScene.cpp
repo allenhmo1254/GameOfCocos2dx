@@ -109,7 +109,7 @@ void ChooseLevelScene::scrollViewDidZoom(CCScrollView* view)
 
 bool ChooseLevelScene::ccTouchBegan(CCTouch *pTouch, CCEvent *pEvent)
 {
-    touchBeginPos_ = CCDirector::sharedDirector() -> convertToGL(pTouch -> getLocationInView());
+    touchBeginPos_ = CCDirector::sharedDirector() -> convertToGL(pTouch -> getLocation());
     return true;
 }
 

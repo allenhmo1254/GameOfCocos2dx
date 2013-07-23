@@ -12,6 +12,7 @@
 #include <iostream>
 #include "cocos2d.h"
 
+
 class GameSceneManager;
 class GameScene : public cocos2d::CCLayer
 {
@@ -28,6 +29,8 @@ public:
     CREATE_FUNC(GameScene);
     
     void initGameSprite();
+    
+    
 };
 
 #endif /* defined(__SpotTheDifference__GameScene__) */

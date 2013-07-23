@@ -11,6 +11,7 @@
 
 #include <iostream>
 #include "cocos2d.h"
+#include "GameSprite.h"
 
 
 typedef enum{
@@ -25,7 +26,7 @@ typedef enum{
 }GameState;//游戏状态
 
 
-class GameSceneManager : public cocos2d::CCObject
+class GameSceneManager : public cocos2d::CCObject, public GameSpriteProtocol
 {
 public:
     CC_SYNTHESIZE(cocos2d::CCArray *, gameSpriteArray_, GameSpriteArray);
@@ -43,6 +44,8 @@ public:
     void initGameSpriteArray();
     
     void setGameSpriteShowCircle(int index);
+    
+    virtual void gameSpriteTouchPressed(int index);
 };
 
 #endif /* defined(__SpotTheDifference__GameSceneManager__) */

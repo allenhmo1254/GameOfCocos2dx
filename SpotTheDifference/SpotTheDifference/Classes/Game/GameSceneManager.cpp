@@ -8,7 +8,6 @@
 
 #include "GameSceneManager.h"
 #include "../PublicData/PublicDataManager.h"
-#include "GameSprite.h"
 
 static GameSceneManager* gameSceneManager_;
 
@@ -70,3 +69,11 @@ void GameSceneManager::setGameSpriteShowCircle(int index)
         
     }
 }
+
+
+
+void GameSceneManager::gameSpriteTouchPressed(int index)
+{
+    setGameSpriteShowCircle(index);
+}
+

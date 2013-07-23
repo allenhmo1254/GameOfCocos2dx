@@ -10,6 +10,7 @@
 #include "GameSceneManager.h"
 #include "../PublicData/PublicDatas.h"
 #include "GameSprite.h"
+#include "../PublicData/GameData.h"
 
 using namespace cocos2d;
 
@@ -49,12 +50,18 @@ bool GameScene::init()
 
 void GameScene::initGameSprite()
 {
-    GameSprite *sprite = GameSprite::createWithSpriteId("1001", true);
-    addChild(sprite);
-    sprite -> setAnchorPoint(CCPointZero);
-    sprite -> setPosition(CCPointZero);
-//    sprite -> setFlipX(true);
-    sprite -> setFlipY(true);
-    gameSceneManager_ -> getGameSpriteArray() -> addObject(sprite);
+    const int count = 2;
+    bool state[count] = {true, false};
+    float anchorX[count] = {1, 0};
+    
+    for (int i = 0; i < count - 1; i ++) {
+        GameSprite *sprite = GameSprite::createWithSpriteId("1001", state[i]);
+        sprite -> setAnchorPoint(ccp(anchorX[i],0.5));
+        sprite -> setPosition(ccp(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2));
+        addChild(sprite);
+        gameSceneManager_ -> getGameSpriteArray() -> addObject(sprite);
+        sprite -> setGameSpriteProtocol(gameSceneManager_);
+    }
 }
+
 
