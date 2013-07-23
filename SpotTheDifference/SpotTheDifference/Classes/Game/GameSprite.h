@@ -16,6 +16,11 @@ class GameSceneManager;
 class GameSprite : public cocos2d::CCLayer {
 protected:
     GameSceneManager *gameSceneManager_;
+    const char *name_;
+    bool flipX_;
+    bool flipY_;
+    cocos2d::CCSprite *mainSprite_;
+    cocos2d::CCSize mainSpriteSize_;
 public:
     CC_SYNTHESIZE_READONLY(cocos2d::CCArray *, differentSpriteArray_, DifferentSpriteArray);
     CC_SYNTHESIZE(bool , isShowDifferent_, IsShowDifferent);
@@ -42,6 +47,14 @@ public:
     //加载和退出时调用的函数
     void onEnter();
     void onExit();
+    //设置水平和垂直翻转
+    bool getFlipX();
+    void setFlipX(bool state);
+    bool getFlipY();
+    void setFlipY(bool state);
+    //得到精灵的Rect
+    cocos2d::CCRect getGameSpriteRect(cocos2d::CCSprite *sprite);
+
 };
 
 #endif /* defined(__SpotTheDifference__GameSprite__) */

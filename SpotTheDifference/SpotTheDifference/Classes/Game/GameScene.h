@@ -27,7 +27,7 @@ public:
     // preprocessor macro for "static create()" constructor ( node() deprecated )
     CREATE_FUNC(GameScene);
     
-    void initMainImage();
+    void initGameSprite();
 };
 
 #endif /* defined(__SpotTheDifference__GameScene__) */

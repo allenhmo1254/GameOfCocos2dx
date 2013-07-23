@@ -48,6 +48,7 @@ GameSceneManager::~GameSceneManager()
 void GameSceneManager::init()
 {
     PublicDataManager::sharedPublicDataManager();
+    initGameSpriteArray();
 }
 
 

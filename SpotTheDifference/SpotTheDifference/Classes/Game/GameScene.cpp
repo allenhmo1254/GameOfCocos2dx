@@ -9,7 +9,7 @@
 #include "GameScene.h"
 #include "GameSceneManager.h"
 #include "../PublicData/PublicDatas.h"
-#include "DifferentSprite.h"
+#include "GameSprite.h"
 
 using namespace cocos2d;
 
@@ -41,18 +41,20 @@ bool GameScene::init()
     
     gameSceneManager_ = GameSceneManager::sharedGameSceneManager();
     
-    DifferentSprite *sp = DifferentSprite::create("Icon.png");
-    sp -> setPosition(ccp(100, 100));
-    addChild(sp);
-    sp -> setOpacity(0);
-    sp -> setIsShowCircle(true);
+    initGameSprite();
     
     return true;
 }
 
 
-void GameScene::initMainImage()
+void GameScene::initGameSprite()
 {
-    
+    GameSprite *sprite = GameSprite::createWithSpriteId("1001", true);
+    addChild(sprite);
+    sprite -> setAnchorPoint(CCPointZero);
+    sprite -> setPosition(CCPointZero);
+//    sprite -> setFlipX(true);
+    sprite -> setFlipY(true);
+    gameSceneManager_ -> getGameSpriteArray() -> addObject(sprite);
 }
 

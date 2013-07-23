@@ -56,7 +56,7 @@ void CheckPointData::init()
 {
     initMainImageFile();
     initDifferentImageFile();
-    
+    initDifferentImagePos();
 }
 
 
@@ -92,8 +92,9 @@ void CheckPointData::initDifferentImagePos()
     
     
     CCArray *tempArray = CCArray::createWithCapacity(7);
+    int posarray[14] = {347, 387, 183, 335, 437, 47, 521, 90, 169, 39, 44, 79, 273, 147};
     for (int i = 0; i < 7; i ++) {
-        CCPoint pos = ccp(100, 100);
+        CCPoint pos = ccp(posarray[i * 2], posarray[i * 2 + 1]);
         CCBValue *value = CCBValue::valueWithCCPoint(pos);
         tempArray -> addObject(value);
     }
