@@ -19,7 +19,10 @@ GameSprite::GameSprite()
 :differentSpriteArray_(NULL),
 isShowDifferent_(false),
 gameSpriteProtocol_(NULL),
-differentSpriteNum_(0)
+differentSpriteNum_(0),
+spriteName_(NULL),
+flipX_(false),
+flipY_(false)
 {
     
 }
@@ -30,6 +33,9 @@ GameSprite::~GameSprite()
     differentSpriteArray_ -> removeAllObjects();
     differentSpriteArray_ -> release();
     differentSpriteArray_ = NULL;
+    
+    spriteName_ -> release();
+    spriteName_ = NULL;
     
 }
 
@@ -53,9 +59,11 @@ bool GameSprite::initWithFile(const char *name, bool isShowDifferent)
     if (!CCLayer::init()) {
         return false;
     }
-    name_ = name;
+    spriteName_ = CCString::create(name);
+    spriteName_ -> retain();
+    isShowDifferent_ = isShowDifferent;
     initDifferentSpriteArray();
-    initGameSprite(name, isShowDifferent);
+    initGameSprite();
     
     return true;
 }
@@ -63,39 +71,63 @@ bool GameSprite::initWithFile(const char *name, bool isShowDifferent)
 
 void GameSprite::initDifferentSpriteArray()
 {
-    
-    CCArray *differentSpriteFileArray = (CCArray *)CheckPointData::sharedCheckPointData() -> getDifferentImageFile() -> objectForKey(name_);
+    CCArray *differentSpriteFileArray = (CCArray *)CheckPointData::sharedCheckPointData() -> getDifferentImageFile() -> objectForKey(spriteName_ -> getCString());
     differentSpriteNum_ = differentSpriteFileArray -> count();
-    CCLOG("differentSpriteNum_ = %d",differentSpriteNum_);
     differentSpriteArray_ = CCArray::createWithCapacity(differentSpriteNum_);
     differentSpriteArray_ -> retain();
     
 }
 
-void GameSprite::initGameSprite(const char *name, bool isShowDifferent)
+
+
+bool GameSprite::initMainSprite()
 {
-    CCString *mainSpriteFile = (CCString *)CheckPointData::sharedCheckPointData() -> getMainImageFile() -> objectForKey(name);
-    isShowDifferent_ = isShowDifferent;
+    CCString *mainSpriteFile = (CCString *)CheckPointData::sharedCheckPointData() -> getMainImageFile() -> objectForKey(spriteName_ -> getCString());
     if (mainSpriteFile) {
         mainSprite_ = CCSprite::create(mainSpriteFile -> getCString());
         addChild(mainSprite_, -2);
         mainSprite_ -> setAnchorPoint(CCPointZero);
         mainSprite_ -> setPosition(CCPointZero);
-        CCArray *differentSpriteFileArray = (CCArray *)CheckPointData::sharedCheckPointData() -> getDifferentImageFile() -> objectForKey(name);
-        CCArray *differentSpritePosArray = (CCArray *)CheckPointData::sharedCheckPointData() -> getDifferentImagePos() -> objectForKey(name);
         mainSpriteSize_ = mainSprite_ -> getContentSize();
-        for (int i = 0, count = differentSpriteFileArray -> count(); i < count; i ++) {
-            CCString *differentSpriteFile = (CCString *)differentSpriteFileArray -> objectAtIndex(i);
-            CCPoint differentSpritePos = ((CCBValue *)differentSpritePosArray -> objectAtIndex(i)) -> getCCPointValue();
-            DifferentSprite *differentSprite = DifferentSprite::create(differentSpriteFile -> getCString());
-            differentSpriteArray_ -> addObject(differentSprite);
-            addChild(differentSprite, -1);
-            differentSprite -> setAnchorPoint(ccp(0,1));
-            differentSprite -> setPosition(ccp(differentSpritePos.x / CC_CONTENT_SCALE_FACTOR(),mainSpriteSize_.height - differentSpritePos.y / CC_CONTENT_SCALE_FACTOR()));
-            if (!isShowDifferent_) {
-                differentSprite -> setOpacity(0);
-            }
+        return true;
+    }
+    return false;
+}
+
+
+CCPoint GameSprite::getDifferentSpritePos(DifferentSprite *differentSprite, CCPoint pos)
+{
+    float x = pos.x / CC_CONTENT_SCALE_FACTOR();
+    float y = mainSpriteSize_.height - pos.y / CC_CONTENT_SCALE_FACTOR() - differentSprite -> getContentSize().height;
+    return ccp(x, y);
+}
+
+
+void GameSprite::initDifferentSprite()
+{
+    CCArray *differentSpriteFileArray = (CCArray *)CheckPointData::sharedCheckPointData() -> getDifferentImageFile() -> objectForKey(spriteName_ -> getCString());
+    CCArray *differentSpritePosArray = (CCArray *)CheckPointData::sharedCheckPointData() -> getDifferentImagePos() -> objectForKey(spriteName_ -> getCString());
+    for (int i = 0, count = differentSpriteFileArray -> count(); i < count; i ++) {
+        CCString *differentSpriteFile = (CCString *)differentSpriteFileArray -> objectAtIndex(i);
+        CCPoint differentSpritePos = ((CCBValue *)differentSpritePosArray -> objectAtIndex(i)) -> getCCPointValue();
+        
+        DifferentSprite *differentSprite = DifferentSprite::create(differentSpriteFile -> getCString());
+        differentSpriteArray_ -> addObject(differentSprite);
+        addChild(differentSprite, -1);
+        differentSprite -> setAnchorPoint(CCPointZero);
+        differentSprite -> setPosition(getDifferentSpritePos(differentSprite, differentSpritePos));
+        if (!isShowDifferent_) {
+            differentSprite -> setOpacity(0);
         }
+    }
+}
+
+
+
+void GameSprite::initGameSprite()
+{
+    if (initMainSprite()) {
+        initDifferentSprite();
     }
 }
 
@@ -121,12 +153,20 @@ void GameSprite::ccTouchEnded(CCTouch *pTouch, CCEvent *pEvent)
 
 void GameSprite::draw()
 {
+    drawSpriteRect();
+}
+
+
+
+void GameSprite::drawSpriteRect()
+{
     for (int i = 0; i < differentSpriteNum_; i ++) {
         DifferentSprite *sprite = (DifferentSprite *)differentSpriteArray_ -> objectAtIndex(i);
         CCRect rect = getGameSpriteRect(sprite);
-        ccDrawRect(rect.origin, ccp(rect.origin.x + rect.size.width, rect.origin.y + rect.size.height));
+        ccDrawRect(ccp(rect.origin.x - getPositionX(), rect.origin.y - getPositionY()), ccp(rect.origin.x - getPositionX() + rect.size.width, rect.origin.y - getPositionY() + rect.size.height));
     }
 }
+
 
 
 void GameSprite::checkDifferentSprite(CCPoint pos)
@@ -136,6 +176,7 @@ void GameSprite::checkDifferentSprite(CCPoint pos)
     for (int i = 0; i < differentSpriteNum_; i ++) {
         DifferentSprite *sprite = (DifferentSprite *)differentSpriteArray_ -> objectAtIndex(i);
         CCRect rect = getGameSpriteRect(sprite);
+        CCLOG("rect.origin.x = %f,rect.origin.y = %f",sprite -> getPosition().x,sprite -> getPosition().y);
         CCLOG("rect.origin.x = %f,rect.origin.y = %f,rect.size.width = %f,rect.size.height = %f",rect.origin.x,rect.origin.y,rect.size.width,rect.size.height);
         if (rect.containsPoint(pos) && !sprite -> getIsShowCircle()) {
             if (gameSpriteProtocol_) {
@@ -184,7 +225,7 @@ void GameSprite::setFlipX(bool state)
             CCPoint tempAnchor = sprite -> getAnchorPoint();
             CCPoint tempPos = sprite -> getPosition();
             sprite -> setAnchorPoint(ccp(1 - tempAnchor.x, tempAnchor.y));
-            sprite -> setPosition(ccp(mainSpriteSize_.width - tempPos.x, tempPos.y));
+            sprite -> setPosition(ccp(mainSpriteSize_.width - tempPos.x + startPos_.x * 2, tempPos.y));
             sprite -> setFlipX(flipX_);
         }
     }
@@ -206,7 +247,7 @@ void GameSprite::setFlipY(bool state)
             CCPoint tempAnchor = sprite -> getAnchorPoint();
             CCPoint tempPos = sprite -> getPosition();
             sprite -> setAnchorPoint(ccp(tempAnchor.x, 1 - tempAnchor.y));
-            sprite -> setPosition(ccp(tempPos.x, mainSpriteSize_.height - tempPos.y));
+            sprite -> setPosition(ccp(tempPos.x, mainSpriteSize_.height - tempPos.y + startPos_.y * 2));
             sprite -> setFlipY(flipY_);
         }
     }
@@ -216,7 +257,7 @@ void GameSprite::setFlipY(bool state)
 CCRect GameSprite::getGameSpriteRect(CCSprite *sprite)
 {
     float x = flipX_ == true ? sprite -> getPosition().x - sprite -> getContentSize().width : sprite -> getPosition().x;
-    float y = flipY_ == true ? sprite -> getPosition().y : sprite -> getPosition().y - sprite -> getContentSize().height;
+    float y = flipY_ == true ? sprite -> getPosition().y - sprite -> getContentSize().height: sprite -> getPosition().y;
     float width = sprite -> getContentSize().width;
     float height = sprite -> getContentSize().height;
     return CCRectMake(x + getPositionX(), y + getPositionY(), width, height);

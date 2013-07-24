@@ -20,9 +20,10 @@ public:
 
 
 class GameSceneManager;
+class DifferentSprite;
 class GameSprite : public cocos2d::CCLayer {
 protected:
-    const char *name_;
+    cocos2d::CCString *spriteName_;;
     bool flipX_;
     bool flipY_;
     cocos2d::CCSprite *mainSprite_;
@@ -44,7 +45,9 @@ public:
     //初始化不同的精灵数组
     void initDifferentSpriteArray();
     //初始化游戏精灵
-    void initGameSprite(const char *name, bool isShowDifferent);
+    void initGameSprite();
+    bool initMainSprite();
+    void initDifferentSprite();
     //当前层的触摸
     virtual bool ccTouchBegan(cocos2d::CCTouch *pTouch, cocos2d::CCEvent *pEvent);
 	virtual void ccTouchMoved(cocos2d::CCTouch *pTouch, cocos2d::CCEvent *pEvent);
@@ -67,8 +70,12 @@ public:
     virtual void setAnchorPoint(const cocos2d::CCPoint& anchor);
     //重置精灵的坐标
     void resetSpritePos();
-    
+    //重写draw方法
     virtual void draw(void);
+    //绘制精灵的碰撞框
+    void drawSpriteRect();
+    
+    cocos2d::CCPoint getDifferentSpritePos(DifferentSprite *differentSprite, cocos2d::CCPoint pos);
 
 };
 

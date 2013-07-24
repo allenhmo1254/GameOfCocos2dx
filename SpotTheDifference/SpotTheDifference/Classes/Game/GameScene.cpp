@@ -54,10 +54,12 @@ void GameScene::initGameSprite()
     bool state[count] = {true, false};
     float anchorX[count] = {1, 0};
     
-    for (int i = 0; i < count - 1; i ++) {
+    
+    for (int i = 0; i < count - 0; i ++) {
         GameSprite *sprite = GameSprite::createWithSpriteId("1001", state[i]);
         sprite -> setAnchorPoint(ccp(anchorX[i],0.5));
         sprite -> setPosition(ccp(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2));
+        sprite -> setFlipY(state[i]);
         addChild(sprite);
         gameSceneManager_ -> getGameSpriteArray() -> addObject(sprite);
         sprite -> setGameSpriteProtocol(gameSceneManager_);
