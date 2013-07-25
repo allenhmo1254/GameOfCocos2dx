@@ -21,6 +21,8 @@ typedef enum {
 
 class CWAScrollView : public cocos2d::CCLayer
 {
+protected:
+    float moveDurationTime_;
 public:
     CC_SYNTHESIZE(bool, isTouchMoved_, IsTouchMove);
     CC_SYNTHESIZE(CWAScrollViewDirection, direction_, Direction);
@@ -45,6 +47,8 @@ public:
     void setLayerMove(cocos2d::CCPoint nextPos);
     cocos2d::CCPoint setLayerPosition(cocos2d::CCPoint nextPos);
     cocos2d::CCPoint setMoveRange(cocos2d::CCPoint newPos);
+    int isCrosse(cocos2d::CCPoint point);
+    void touchEndProcess();
 };
 
 

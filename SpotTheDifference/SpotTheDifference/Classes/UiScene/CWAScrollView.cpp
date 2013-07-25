@@ -14,7 +14,8 @@ using namespace cocos2d;
 
 CWAScrollView::CWAScrollView()
 :direction_(CWAScrollViewDirectionNone),
-isTouchMoved_(false)
+isTouchMoved_(false),
+moveDurationTime_(0)
 {
     
 }
@@ -33,6 +34,7 @@ bool CWAScrollView::init()
     }
     
     setAnchorPoint(CCPointZero);
+    moveDurationTime_ = 0.2;
     
     return true;
 }
@@ -65,7 +67,7 @@ void CWAScrollView::ccTouchMoved(CCTouch *pTouch, CCEvent *pEvent)
 
 void CWAScrollView::ccTouchEnded(CCTouch *pTouch, CCEvent *pEvent)
 {
-    
+    touchEndProcess();
 }
 
 
@@ -90,7 +92,7 @@ void CWAScrollView::setLayerMove(CCPoint nextPos)
     //自定义方法
     CCPoint newPos = setLayerPosition(nextPos);
     
-    newPos = setMoveRange(newPos);
+//    newPos = setMoveRange(newPos);
     
     setPosition(newPos);
 }
@@ -107,12 +109,79 @@ CCPoint CWAScrollView::setMoveRange(CCPoint newPos)
             break;
         case CWAScrollViewDirection_Vertical:
             newPos.y = MAX(0, newPos.y);
-            newPos.y = MIN(this -> getContentSize().height, newPos.y);
+            newPos.y = MIN(SCREEN_HEIGHT - this -> getContentSize().height, newPos.y);
             break;
     }
     
     return newPos;
 }
+
+
+
+void CWAScrollView::touchEndProcess()
+{
+    switch (direction_) {
+        case CWAScrollViewDirectionNone:
+            return;
+        case CWAScrollViewDirection_Horizontal:
+            switch (isCrosse(this -> getPosition())) {
+                case -1:
+                {
+                    CCMoveTo *move = CCMoveTo::create(moveDurationTime_, ccp(SCREEN_WIDTH - this -> getContentSize().width, this -> getPositionY()));
+                    runAction(move);
+                }
+                    break;
+                case 1:
+                {
+                    CCMoveTo *move = CCMoveTo::create(moveDurationTime_, ccp(0, this -> getPositionY()));
+                    runAction(move);
+                }
+                    break;
+            }
+            break;
+        case CWAScrollViewDirection_Vertical:
+            switch (isCrosse(this -> getPosition())) {
+                case -1:
+                {
+                    CCMoveTo *move = CCMoveTo::create(moveDurationTime_, ccp(this -> getPositionX(), 0));
+                    runAction(move);
+                }
+                    break;
+                case 1:
+                {
+                    CCMoveTo *move = CCMoveTo::create(moveDurationTime_, ccp(this -> getPositionX(), SCREEN_HEIGHT - this -> getContentSize().height));
+                    runAction(move);
+                }
+                    break;
+            }
+            break;
+    }
+}
+
+
+
+int CWAScrollView::isCrosse(CCPoint point)
+{
+    switch (direction_) {
+        case CWAScrollViewDirectionNone:
+            return 0;
+        case CWAScrollViewDirection_Horizontal:
+            if (point.x < SCREEN_WIDTH - this -> getContentSize().width) {
+                return -1;
+            } else if(point.x > 0){
+                return 1;
+            }
+            return 0;
+        case CWAScrollViewDirection_Vertical:
+            if (point.y < 0) {
+                return -1;
+            } else if (point.y > SCREEN_HEIGHT - this -> getContentSize().height){
+                return 1;
+            }
+            return 0;
+    }
+}
+
 
 
 CCPoint CWAScrollView::setLayerPosition(CCPoint nextPos)
@@ -121,9 +190,23 @@ CCPoint CWAScrollView::setLayerPosition(CCPoint nextPos)
         case CWAScrollViewDirectionNone:
             return this -> getPosition();
         case CWAScrollViewDirection_Horizontal:
-            return ccp(this -> getPositionX() + nextPos.x, this -> getPositionY());
+        {
+            CCPoint tempPos = ccp(this -> getPositionX() + nextPos.x, this -> getPositionY());
+            if (isCrosse(tempPos) != 0) {
+                return ccp(this -> getPositionX() + nextPos.x / 3, this -> getPositionY());
+            } else {
+                return tempPos;
+            }
+        }
         case CWAScrollViewDirection_Vertical:
-            return ccp(this -> getPositionX(), this -> getPositionY() + nextPos.y);
+        {
+            CCPoint tempPos = ccp(this -> getPositionX(), this -> getPositionY() + nextPos.y);
+            if (isCrosse(tempPos) != 0) {
+                return ccp(this -> getPositionX(), this -> getPositionY() + nextPos.y / 3);
+            } else {
+                return tempPos;
+            }
+        }
     }
 }
 

@@ -118,7 +118,7 @@ bool ChooseLevelScene::ccTouchBegan(CCTouch *pTouch, CCEvent *pEvent)
 
 void ChooseLevelScene::ccTouchMoved(CCTouch *pTouch, CCEvent *pEvent)
 {
-    CCLOG("ccTouchMoved");
+    
 }
 
 void ChooseLevelScene::ccTouchEnded(CCTouch *pTouch, CCEvent *pEvent)
@@ -147,8 +147,6 @@ void ChooseLevelScene::moveScrollView(FaceTo faceTo)
     }
     
     CCPoint  movePos = ccp(origin.x - visibleSize.width * currnetPage_, 0);
-    CCLOG("faceTo = %d",faceTo);
-    CCLOG("movePos.x = %f,movePos.y = %f",movePos.x,movePos.y);
 //    levelScrollView_ -> setContentOffset(movePos, true);
 }
 
