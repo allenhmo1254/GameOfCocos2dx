@@ -295,6 +295,7 @@
 		F0D87F8617A0B6DF00A5D3A7 /* CCDirector+DtTime.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F0D87F8517A0B6DF00A5D3A7 /* CCDirector+DtTime.cpp */; };
 		F0D87F9217A0C42900A5D3A7 /* GamePlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F0D87F8E17A0C42900A5D3A7 /* GamePlayer.cpp */; };
 		F0D87F9317A0C42900A5D3A7 /* GameRole.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F0D87F9017A0C42900A5D3A7 /* GameRole.cpp */; };
+		F0D87F9617A0D33300A5D3A7 /* CWAScrollView.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F0D87F9417A0D33300A5D3A7 /* CWAScrollView.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -915,6 +916,8 @@
 		F0D87F8F17A0C42900A5D3A7 /* GamePlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GamePlayer.h; sourceTree = "<group>"; };
 		F0D87F9017A0C42900A5D3A7 /* GameRole.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameRole.cpp; sourceTree = "<group>"; };
 		F0D87F9117A0C42900A5D3A7 /* GameRole.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameRole.h; sourceTree = "<group>"; };
+		F0D87F9417A0D33300A5D3A7 /* CWAScrollView.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CWAScrollView.cpp; sourceTree = "<group>"; };
+		F0D87F9517A0D33300A5D3A7 /* CWAScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CWAScrollView.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -2089,6 +2092,8 @@
 				1DBD7850179822F3005CEED6 /* ChooseLevelScene.h */,
 				1DBD7860179825EB005CEED6 /* ChooseGameScene.cpp */,
 				1DBD7861179825EB005CEED6 /* ChooseGameScene.h */,
+				F0D87F9417A0D33300A5D3A7 /* CWAScrollView.cpp */,
+				F0D87F9517A0D33300A5D3A7 /* CWAScrollView.h */,
 			);
 			name = UiScene;
 			path = Classes/UiScene;
@@ -2530,6 +2535,7 @@
 				F0D87F8617A0B6DF00A5D3A7 /* CCDirector+DtTime.cpp in Sources */,
 				F0D87F9217A0C42900A5D3A7 /* GamePlayer.cpp in Sources */,
 				F0D87F9317A0C42900A5D3A7 /* GameRole.cpp in Sources */,
+				F0D87F9617A0D33300A5D3A7 /* CWAScrollView.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -64,7 +64,7 @@ bool MainMenuScene::init()
 
 void MainMenuScene::startGame(CCObject* pSender)
 {
-    CCDirector::sharedDirector() -> replaceScene(GameScene::scene());
+    CCDirector::sharedDirector() -> replaceScene(ChooseLevelScene::scene());
 }
 
 

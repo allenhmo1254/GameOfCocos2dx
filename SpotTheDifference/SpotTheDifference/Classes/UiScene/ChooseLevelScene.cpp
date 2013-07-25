@@ -85,13 +85,16 @@ void ChooseLevelScene::levelButtonPressed(CCObject* pSender)
 
 void ChooseLevelScene::initScrollView()
 {
-    levelScrollView_ = CCScrollView::create(CCSizeMake(SCREEN_WIDTH, SCREEN_HEIGHT), levelButtonLayer_);
-    levelScrollView_ -> setContentOffset(CCPointZero);
-    levelScrollView_ -> setTouchEnabled(true);
-    levelScrollView_ -> setDelegate(this);
-    levelScrollView_ -> setDirection(kCCScrollViewDirectionHorizontal);
+    levelScrollView_ = CWAScrollView::create();
+    levelScrollView_ -> addChild(levelButtonLayer_);
+    levelButtonLayer_ -> setAnchorPoint(CCPointZero);
+    levelButtonLayer_ -> setPosition(CCPointZero);
+//    levelScrollView_ -> setContentOffset(CCPointZero);
+    levelScrollView_ -> setIsTouchMove(true);
+//    levelScrollView_ -> setDelegate(this);
+    levelScrollView_ -> setDirection(CWAScrollViewDirection_Horizontal);
     
-    levelButtonLayer_ -> setContentSize(CCSizeMake(SCREEN_WIDTH * pageNum_, SCREEN_HEIGHT));
+    levelScrollView_ -> setContentSize(CCSizeMake(SCREEN_WIDTH * pageNum_, SCREEN_HEIGHT));
     
     addChild(levelScrollView_);
 }
@@ -146,6 +149,6 @@ void ChooseLevelScene::moveScrollView(FaceTo faceTo)
     CCPoint  movePos = ccp(origin.x - visibleSize.width * currnetPage_, 0);
     CCLOG("faceTo = %d",faceTo);
     CCLOG("movePos.x = %f,movePos.y = %f",movePos.x,movePos.y);
-    levelScrollView_ -> setContentOffset(movePos, true);
+//    levelScrollView_ -> setContentOffset(movePos, true);
 }
 
