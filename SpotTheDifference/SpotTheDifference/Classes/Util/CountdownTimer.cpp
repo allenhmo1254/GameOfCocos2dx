@@ -107,6 +107,9 @@ void CountdownTimer::process()
             delay_ = 0;
             if (--time_ <= 0) {
                 resetTime();
+                if (timerProtocolDelegate_) {
+                    timerProtocolDelegate_ -> timeFinishProcess();
+                }
             }
         }
     }

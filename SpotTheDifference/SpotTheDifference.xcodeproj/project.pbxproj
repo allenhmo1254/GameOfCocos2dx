@@ -293,6 +293,8 @@
 		F0474667179D199900B3D216 /* pic1001.png in Resources */ = {isa = PBXBuildFile; fileRef = F047465F179D199900B3D216 /* pic1001.png */; };
 		F0D87F8417A0B5CB00A5D3A7 /* CountdownTimer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F0D87F8217A0B5CB00A5D3A7 /* CountdownTimer.cpp */; };
 		F0D87F8617A0B6DF00A5D3A7 /* CCDirector+DtTime.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F0D87F8517A0B6DF00A5D3A7 /* CCDirector+DtTime.cpp */; };
+		F0D87F9217A0C42900A5D3A7 /* GamePlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F0D87F8E17A0C42900A5D3A7 /* GamePlayer.cpp */; };
+		F0D87F9317A0C42900A5D3A7 /* GameRole.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F0D87F9017A0C42900A5D3A7 /* GameRole.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -909,6 +911,10 @@
 		F0D87F8217A0B5CB00A5D3A7 /* CountdownTimer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CountdownTimer.cpp; sourceTree = "<group>"; };
 		F0D87F8317A0B5CB00A5D3A7 /* CountdownTimer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CountdownTimer.h; sourceTree = "<group>"; };
 		F0D87F8517A0B6DF00A5D3A7 /* CCDirector+DtTime.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "CCDirector+DtTime.cpp"; sourceTree = "<group>"; };
+		F0D87F8E17A0C42900A5D3A7 /* GamePlayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GamePlayer.cpp; sourceTree = "<group>"; };
+		F0D87F8F17A0C42900A5D3A7 /* GamePlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GamePlayer.h; sourceTree = "<group>"; };
+		F0D87F9017A0C42900A5D3A7 /* GameRole.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameRole.cpp; sourceTree = "<group>"; };
+		F0D87F9117A0C42900A5D3A7 /* GameRole.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameRole.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -2091,6 +2097,7 @@
 		1DBD785317982355005CEED6 /* Game */ = {
 			isa = PBXGroup;
 			children = (
+				F0D87F8D17A0C42900A5D3A7 /* GameRole */,
 				1DBD785D17982485005CEED6 /* GameScene.cpp */,
 				1DBD785E17982485005CEED6 /* GameScene.h */,
 				1DBD786317982868005CEED6 /* GameSceneManager.cpp */,
@@ -2172,6 +2179,17 @@
 			);
 			name = GameImage;
 			path = Resources/GameImage;
+			sourceTree = "<group>";
+		};
+		F0D87F8D17A0C42900A5D3A7 /* GameRole */ = {
+			isa = PBXGroup;
+			children = (
+				F0D87F8E17A0C42900A5D3A7 /* GamePlayer.cpp */,
+				F0D87F8F17A0C42900A5D3A7 /* GamePlayer.h */,
+				F0D87F9017A0C42900A5D3A7 /* GameRole.cpp */,
+				F0D87F9117A0C42900A5D3A7 /* GameRole.h */,
+			);
+			path = GameRole;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -2510,6 +2528,8 @@
 				1DD1743E179D806F00A67344 /* DifferentSprite.cpp in Sources */,
 				F0D87F8417A0B5CB00A5D3A7 /* CountdownTimer.cpp in Sources */,
 				F0D87F8617A0B6DF00A5D3A7 /* CCDirector+DtTime.cpp in Sources */,
+				F0D87F9217A0C42900A5D3A7 /* GamePlayer.cpp in Sources */,
+				F0D87F9317A0C42900A5D3A7 /* GameRole.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

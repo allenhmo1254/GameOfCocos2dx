@@ -29,8 +29,8 @@ void GameSceneManager::clearGameSceneManager()
 
 GameSceneManager::GameSceneManager()
 :gameSpriteArray_(NULL),
-currentFoundNum_(0),
-needFoundNum_(0)
+gameTimer_(NULL),
+gamePlayer_(NULL)
 {
     
 }
@@ -41,6 +41,12 @@ GameSceneManager::~GameSceneManager()
     gameSpriteArray_ -> removeAllObjects();
     gameSpriteArray_ -> release();
     gameSpriteArray_ = NULL;
+    
+    gameTimer_ -> release();
+    gameTimer_ = NULL;
+    
+    gamePlayer_ -> release();
+    gamePlayer_ = NULL;
 }
 
 
@@ -48,6 +54,8 @@ void GameSceneManager::init()
 {
     PublicDataManager::sharedPublicDataManager();
     initGameSpriteArray();
+    gamePlayer_ = GamePlayer::create();
+    gamePlayer_ -> retain();
 }
 
 
@@ -57,6 +65,25 @@ void GameSceneManager::initGameSpriteArray()
     gameSpriteArray_ -> retain();
 }
 
+void GameSceneManager::initGameTimer()
+{
+    gameTimer_ = CountdownTimer::create();
+    gameTimer_ -> retain();
+}
+
+
+void GameSceneManager::resetGameTimer()
+{
+    gameTimer_ -> setTime(300);
+}
+
+
+void GameSceneManager::resetGameData()
+{
+    gamePlayer_ -> resetData();
+    resetGameTimer();
+}
+
 
 void GameSceneManager::setGameSpriteShowCircle(int index)
 {
@@ -64,9 +91,9 @@ void GameSceneManager::setGameSpriteShowCircle(int index)
         GameSprite *sprite = (GameSprite *)gameSpriteArray_ -> objectAtIndex(i);
         sprite -> showCircleWithIndex(index);
     }
-    currentFoundNum_ ++;
-    if (currentFoundNum_ >= needFoundNum_) {
-        
+    gamePlayer_ -> addCurrentFoundNum();
+    if (gamePlayer_ -> isFoundFinish()) {
+        CCLOG("已经找到足够数量的不同");
     }
 }
 

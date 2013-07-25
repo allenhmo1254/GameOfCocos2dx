@@ -12,6 +12,8 @@
 #include <iostream>
 #include "cocos2d.h"
 #include "GameSprite.h"
+#include "CountdownTimer.h"
+#include "GameRole/GamePlayer.h"
 
 
 typedef enum{
@@ -26,12 +28,12 @@ typedef enum{
 }GameState;//游戏状态
 
 
-class GameSceneManager : public cocos2d::CCObject, public GameSpriteProtocol
+class GameSceneManager : public cocos2d::CCObject, public GameSpriteProtocol, public TimerProtocol
 {
 public:
     CC_SYNTHESIZE(cocos2d::CCArray *, gameSpriteArray_, GameSpriteArray);
-    CC_SYNTHESIZE(int, currentFoundNum_, CurrentFoundNum);
-    CC_SYNTHESIZE(int, needFoundNum_, NeedFoundNum);
+    CC_SYNTHESIZE(CountdownTimer *, gameTimer_, GameTimer);
+    CC_SYNTHESIZE(GamePlayer *, gamePlayer_, GamePlayer);
 public:
     static GameSceneManager* sharedGameSceneManager();
     static void clearGameSceneManager();
@@ -40,12 +42,16 @@ public:
     ~GameSceneManager();
     
     void init();
-    
+    //初始化数据
     void initGameSpriteArray();
-    
+    void initGameTimer();
+    //显示圆圈
     void setGameSpriteShowCircle(int index);
-    
+    //游戏触摸碎片以后的回调函数
     virtual void gameSpriteTouchPressed(int index);
+    //重置游戏数据
+    void resetGameTimer();
+    void resetGameData();
 };
 
 #endif /* defined(__SpotTheDifference__GameSceneManager__) */

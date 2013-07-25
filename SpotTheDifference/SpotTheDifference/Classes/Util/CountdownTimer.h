@@ -12,12 +12,21 @@
 #include <iostream>
 #include "cocos2d.h"
 
+
+class TimerProtocol {
+public:
+    void timeFinishProcess();
+};
+
+
 class CountdownTimer : public cocos2d::CCObject {
 protected:
     long int time_;            //时间
     float delay_;         //延迟
-    CC_SYNTHESIZE_READONLY(bool, isFinished_, IsFinished);
     cocos2d::CCDirector *dircetor_;
+public:
+    CC_SYNTHESIZE_READONLY(bool, isFinished_, IsFinished);
+    CC_SYNTHESIZE(TimerProtocol *, timerProtocolDelegate_, TimerProtocolDelegate);
 public:
     CountdownTimer();
     static CountdownTimer* create();
