@@ -291,6 +291,8 @@
 		F0474665179D199900B3D216 /* frag1001-5.png in Resources */ = {isa = PBXBuildFile; fileRef = F047465D179D199900B3D216 /* frag1001-5.png */; };
 		F0474666179D199900B3D216 /* frag1001-6.png in Resources */ = {isa = PBXBuildFile; fileRef = F047465E179D199900B3D216 /* frag1001-6.png */; };
 		F0474667179D199900B3D216 /* pic1001.png in Resources */ = {isa = PBXBuildFile; fileRef = F047465F179D199900B3D216 /* pic1001.png */; };
+		F0D87F8417A0B5CB00A5D3A7 /* CountdownTimer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F0D87F8217A0B5CB00A5D3A7 /* CountdownTimer.cpp */; };
+		F0D87F8617A0B6DF00A5D3A7 /* CCDirector+DtTime.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F0D87F8517A0B6DF00A5D3A7 /* CCDirector+DtTime.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -904,6 +906,9 @@
 		F047465D179D199900B3D216 /* frag1001-5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "frag1001-5.png"; sourceTree = "<group>"; };
 		F047465E179D199900B3D216 /* frag1001-6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "frag1001-6.png"; sourceTree = "<group>"; };
 		F047465F179D199900B3D216 /* pic1001.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pic1001.png; sourceTree = "<group>"; };
+		F0D87F8217A0B5CB00A5D3A7 /* CountdownTimer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CountdownTimer.cpp; sourceTree = "<group>"; };
+		F0D87F8317A0B5CB00A5D3A7 /* CountdownTimer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CountdownTimer.h; sourceTree = "<group>"; };
+		F0D87F8517A0B6DF00A5D3A7 /* CCDirector+DtTime.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "CCDirector+DtTime.cpp"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -2120,6 +2125,7 @@
 		1DBD78551798239B005CEED6 /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				F0D87F8517A0B6DF00A5D3A7 /* CCDirector+DtTime.cpp */,
 				E57720531798D23F00ACA9A2 /* DataInputStream.cpp */,
 				E57720541798D23F00ACA9A2 /* DataInputStream.h */,
 				1DBD785A17982421005CEED6 /* GameUtil.cpp */,
@@ -2128,6 +2134,8 @@
 				E57720581798D86A00ACA9A2 /* IntArray.h */,
 				E577205A1798E21100ACA9A2 /* ActionData.cpp */,
 				E577205B1798E21100ACA9A2 /* ActionData.h */,
+				F0D87F8217A0B5CB00A5D3A7 /* CountdownTimer.cpp */,
+				F0D87F8317A0B5CB00A5D3A7 /* CountdownTimer.h */,
 			);
 			name = Util;
 			path = Classes/Util;
@@ -2500,6 +2508,8 @@
 				F0474656179D17BF00B3D216 /* CheckPointData.cpp in Sources */,
 				1DD1743B179D71EF00A67344 /* GameSprite.cpp in Sources */,
 				1DD1743E179D806F00A67344 /* DifferentSprite.cpp in Sources */,
+				F0D87F8417A0B5CB00A5D3A7 /* CountdownTimer.cpp in Sources */,
+				F0D87F8617A0B6DF00A5D3A7 /* CCDirector+DtTime.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
