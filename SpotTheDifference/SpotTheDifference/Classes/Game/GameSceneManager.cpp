@@ -8,6 +8,7 @@
 
 #include "GameSceneManager.h"
 #include "../PublicData/PublicDataManager.h"
+#include "GameRole/GamePlayer.h"
 
 static GameSceneManager* gameSceneManager_;
 
@@ -54,8 +55,8 @@ void GameSceneManager::init()
 {
     PublicDataManager::sharedPublicDataManager();
     initGameSpriteArray();
-    gamePlayer_ = GamePlayer::create();
-    gamePlayer_ -> retain();
+    initGameTimer();
+    initGamePlayer();
 }
 
 
@@ -69,12 +70,20 @@ void GameSceneManager::initGameTimer()
 {
     gameTimer_ = CountdownTimer::create();
     gameTimer_ -> retain();
+    gameTimer_ -> setTimerProtocolDelegate(this);
+}
+
+
+void GameSceneManager::initGamePlayer()
+{
+    gamePlayer_ = GamePlayer::create();
+    gamePlayer_ -> retain();
 }
 
 
 void GameSceneManager::resetGameTimer()
 {
-    gameTimer_ -> setTime(300);
+    gameTimer_ -> setTime(10);
 }
 
 
@@ -98,9 +107,20 @@ void GameSceneManager::setGameSpriteShowCircle(int index)
 }
 
 
+void GameSceneManager::mainProcess()
+{
+    gameTimer_ -> process();
+}
+
+
 
 void GameSceneManager::gameSpriteTouchPressed(int index)
 {
     setGameSpriteShowCircle(index);
+}
+
+void GameSceneManager::timeFinishProcess()
+{
+    CCLOG("到时间了");
 }
 

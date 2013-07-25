@@ -31,7 +31,8 @@ bool GameRole::init()
 
 void GameRole::resetData()
 {
-    
+    currentFoundNum_ = 0;
+    needFoundNum_ = 5;
 }
 
 

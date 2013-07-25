@@ -42,9 +42,19 @@ bool GameScene::init()
     
     gameSceneManager_ = GameSceneManager::sharedGameSceneManager();
     
+    gameSceneManager_ -> resetGameData();
+    
     initGameSprite();
     
+    schedule(schedule_selector(GameScene::gameUpdate));
+    
     return true;
+}
+
+
+void GameScene::gameUpdate(float time)
+{
+    gameSceneManager_ -> mainProcess();
 }
 
 

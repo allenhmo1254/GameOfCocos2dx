@@ -15,7 +15,7 @@
 
 class TimerProtocol {
 public:
-    void timeFinishProcess();
+    virtual void timeFinishProcess() = 0;
 };
 
 
@@ -29,6 +29,7 @@ public:
     CC_SYNTHESIZE(TimerProtocol *, timerProtocolDelegate_, TimerProtocolDelegate);
 public:
     CountdownTimer();
+    ~CountdownTimer();
     static CountdownTimer* create();
     virtual bool init();
     virtual int hour();

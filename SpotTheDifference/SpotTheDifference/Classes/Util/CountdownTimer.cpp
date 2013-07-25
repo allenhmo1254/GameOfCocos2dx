@@ -13,9 +13,17 @@ CountdownTimer::CountdownTimer():
 isFinished_(false),
 delay_(0.0f),
 dircetor_(NULL),
-time_(0)
+time_(0),
+timerProtocolDelegate_(NULL)
 {
     
+}
+
+
+CountdownTimer::~CountdownTimer()
+{
+    dircetor_ = NULL;
+    timerProtocolDelegate_ = NULL;
 }
 
 

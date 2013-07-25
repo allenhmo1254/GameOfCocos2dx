@@ -29,8 +29,8 @@ public:
     CREATE_FUNC(GameScene);
     
     void initGameSprite();
-    
-    
+    //游戏更新
+    void gameUpdate(float time);
 };
 
 #endif /* defined(__SpotTheDifference__GameScene__) */
