@@ -58,6 +58,7 @@ bool MainMenuScene::init()
     pMenu->setPosition( CCPointZero );
     this->addChild(pMenu, 1);
     
+    
     return true;
 }
 

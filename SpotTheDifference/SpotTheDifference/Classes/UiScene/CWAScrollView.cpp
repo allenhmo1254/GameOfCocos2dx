@@ -15,7 +15,9 @@ using namespace cocos2d;
 CWAScrollView::CWAScrollView()
 :direction_(CWAScrollViewDirectionNone),
 isTouchMoved_(false),
-moveDurationTime_(0)
+moveDurationTime_(0),
+partOfScrollView_(0),
+currentPartOfScrollView_(0)
 {
     
 }
@@ -24,6 +26,22 @@ moveDurationTime_(0)
 CWAScrollView::~CWAScrollView()
 {
     
+}
+
+
+CWAScrollView* CWAScrollView::create(cocos2d::CCSize contentSize, int partOfView)
+{
+    CWAScrollView *view = new CWAScrollView();
+    if (view && view -> init()) {
+        view -> autorelease();
+        view -> setContentSize(contentSize);
+        view -> setPartOfScrollView(partOfView);
+        return view;
+    } else {
+        delete view;
+        view = NULL;
+        return NULL;
+    }
 }
 
 
@@ -37,6 +55,12 @@ bool CWAScrollView::init()
     moveDurationTime_ = 0.2;
     
     return true;
+}
+
+
+void CWAScrollView::setPartOfViewSize()
+{
+    
 }
 
 
@@ -120,42 +144,68 @@ CCPoint CWAScrollView::setMoveRange(CCPoint newPos)
 
 void CWAScrollView::touchEndProcess()
 {
+    if (!crosseProcess()) {
+        partOfViewProcess();
+    }
+}
+
+
+
+void CWAScrollView::partOfViewProcess()
+{
     switch (direction_) {
         case CWAScrollViewDirectionNone:
-            return;
+            break;
+        case CWAScrollViewDirection_Horizontal:
+        {
+            float partOfViewWidth = this -> getContentSize().width / partOfScrollView_;
+            float temp = abs(this -> getPositionX()) - ((currentPartOfScrollView_ + 1) * partOfViewWidth - partOfViewWidth * 2);
+            if (temp > 0) {
+                setCurrentPart(currentPartOfScrollView_ - 1);
+            } else if (temp < 0){
+                setCurrentPart(currentPartOfScrollView_ + 1);
+            }
+        }
+            break;
+        case CWAScrollViewDirection_Vertical:
+        {
+            float partOfViewHeight = this -> getContentSize().height / partOfScrollView_;
+            int tempPart = this -> getPositionY() / partOfViewHeight;
+            setCurrentPart(abs(tempPart));
+        }
+            break;
+    }
+}
+
+
+
+bool CWAScrollView::crosseProcess()
+{
+    switch (direction_) {
+        case CWAScrollViewDirectionNone:
+            return false;
         case CWAScrollViewDirection_Horizontal:
             switch (isCrosse(this -> getPosition())) {
                 case -1:
-                {
-                    CCMoveTo *move = CCMoveTo::create(moveDurationTime_, ccp(SCREEN_WIDTH - this -> getContentSize().width, this -> getPositionY()));
-                    runAction(move);
-                }
-                    break;
+                    layerMoveActionWithPart(partOfScrollView_ - 1);
+                    return true;
                 case 1:
-                {
-                    CCMoveTo *move = CCMoveTo::create(moveDurationTime_, ccp(0, this -> getPositionY()));
-                    runAction(move);
-                }
-                    break;
+                    layerMoveActionWithPart(0);
+                    return true;
             }
             break;
         case CWAScrollViewDirection_Vertical:
             switch (isCrosse(this -> getPosition())) {
                 case -1:
-                {
-                    CCMoveTo *move = CCMoveTo::create(moveDurationTime_, ccp(this -> getPositionX(), 0));
-                    runAction(move);
-                }
-                    break;
+                    layerMoveActionWithPart(0);
+                    return true;
                 case 1:
-                {
-                    CCMoveTo *move = CCMoveTo::create(moveDurationTime_, ccp(this -> getPositionX(), SCREEN_HEIGHT - this -> getContentSize().height));
-                    runAction(move);
-                }
-                    break;
+                    layerMoveActionWithPart(partOfScrollView_ - 1);
+                    return true;
             }
             break;
     }
+    return false;
 }
 
 
@@ -208,5 +258,40 @@ CCPoint CWAScrollView::setLayerPosition(CCPoint nextPos)
             }
         }
     }
+}
+
+
+
+void CWAScrollView::layerMoveActionWithPart(int part)
+{
+    switch (direction_) {
+        case CWAScrollViewDirectionNone:
+            return;
+        case CWAScrollViewDirection_Horizontal:
+        {
+            CCPoint point = ccp(this -> getContentSize().width / partOfScrollView_ * part, this -> getPositionY());
+            CCMoveTo *move = CCMoveTo::create(moveDurationTime_, point);
+            runAction(move);
+        }
+            break;
+        case CWAScrollViewDirection_Vertical:
+        {
+            CCPoint point = ccp(this -> getPositionX(), this -> getContentSize().height / partOfScrollView_ * part);
+            CCMoveTo *move = CCMoveTo::create(moveDurationTime_, point);
+            runAction(move);
+        }
+            break;
+    }
+}
+
+
+
+void CWAScrollView::setCurrentPart(int part)
+{
+    if (part < 0 || part >= partOfScrollView_) {
+        return;
+    }
+    currentPartOfScrollView_ = part;
+    layerMoveActionWithPart(currentPartOfScrollView_);
 }
 

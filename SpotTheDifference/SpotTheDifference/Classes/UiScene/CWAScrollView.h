@@ -22,15 +22,20 @@ typedef enum {
 class CWAScrollView : public cocos2d::CCLayer
 {
 protected:
-    float moveDurationTime_;
+    float moveDurationTime_;          //移动的延迟时间
+    int currentPartOfScrollView_;     //当前部分
+    cocos2d::CCSize partOfViewSize_;  //每部分的尺寸
 public:
     CC_SYNTHESIZE(bool, isTouchMoved_, IsTouchMove);
     CC_SYNTHESIZE(CWAScrollViewDirection, direction_, Direction);
+    CC_SYNTHESIZE(int, partOfScrollView_, PartOfScrollView);//一共有几个部分
 public:
     CWAScrollView();
     ~CWAScrollView();
     // Method 'init' in cocos2d-x returns bool, instead of 'id' in cocos2d-iphone (an object pointer)
     virtual bool init();
+    
+    static CWAScrollView* create(cocos2d::CCSize contentSize, int partOfView);
     
     // preprocessor macro for "static create()" constructor ( node() deprecated )
     CREATE_FUNC(CWAScrollView);
@@ -49,6 +54,15 @@ public:
     cocos2d::CCPoint setMoveRange(cocos2d::CCPoint newPos);
     int isCrosse(cocos2d::CCPoint point);
     void touchEndProcess();
+    bool crosseProcess();
+    //设置当前的part
+    void setCurrentPart(int part);
+    //移动到part指定的位置
+    void layerMoveActionWithPart(int part);
+    //设置每部分的尺寸
+    void setPartOfViewSize();
+    //当触摸松开时，层停在哪个部分的位置
+    void partOfViewProcess();
 };
 
 
