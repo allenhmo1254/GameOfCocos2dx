@@ -7,7 +7,7 @@
 //
 
 #include "CWAScrollView.h"
-#include "../PublicData/GameData.h"
+#include "../../PublicData/GameData.h"
 
 #define MOVESPEED             20
 #define MOVEASPEED           0.2
