@@ -27,6 +27,7 @@ void DifferentSprite::setIsShowCircle(bool state)
     isShowCircle_ = state;
     if (isShowCircle_) {
         CCSprite *mainSprite = CCSprite::create("Icon-72.png");
+        mainSprite -> setPosition(ccp(this -> getContentSize().width / 2, this -> getContentSize().height / 2));
         addChild(mainSprite);
     }
 }
