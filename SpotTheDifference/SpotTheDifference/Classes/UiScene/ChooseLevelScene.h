@@ -13,6 +13,7 @@
 #include "cocos2d.h"
 #include "cocos-ext.h"
 #include "../PublicData/GameData.h"
+//#include "CWATableView.h"
 #include "CWAScrollView.h"
 
 USING_NS_CC;
@@ -23,7 +24,7 @@ class ChooseLevelScene : public cocos2d::CCLayer
 {
 private:
     CCMenu *levelButtonLayer_;
-    CWAScrollView *levelScrollView_;
+    CWAScrollView *levelView_;
     int currnetPage_;
     CCPoint touchBeginPos_;
 public:

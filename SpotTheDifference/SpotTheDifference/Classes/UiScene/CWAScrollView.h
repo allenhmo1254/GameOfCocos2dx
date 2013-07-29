@@ -22,23 +22,31 @@ typedef enum {
 class CWAScrollView : public cocos2d::CCLayer
 {
 protected:
-    float moveDurationTime_;          //移动的延迟时间
-    int currentPartOfScrollView_;     //当前部分
-    cocos2d::CCSize partOfViewSize_;  //每部分的尺寸
+    cocos2d::CCPoint moveLayerStartPos_,
+    moveLayerEndPos_,
+    moveLayerDifferencePos_,
+    moveLayerSpeed,
+    moveLayeraSpeed;
+    int moveHdirection_,
+    moveVdirection_;
+    bool isMoveLayer_;
 public:
     CC_SYNTHESIZE(bool, isTouchMoved_, IsTouchMove);
     CC_SYNTHESIZE(CWAScrollViewDirection, direction_, Direction);
-    CC_SYNTHESIZE(int, partOfScrollView_, PartOfScrollView);//一共有几个部分
 public:
     CWAScrollView();
     ~CWAScrollView();
     // Method 'init' in cocos2d-x returns bool, instead of 'id' in cocos2d-iphone (an object pointer)
     virtual bool init();
     
-    static CWAScrollView* create(cocos2d::CCSize contentSize, int partOfView);
+    static CWAScrollView* create(cocos2d::CCSize contentSize);
     
-    // preprocessor macro for "static create()" constructor ( node() deprecated )
-    CREATE_FUNC(CWAScrollView);
+    virtual void touchBeginProcess(cocos2d::CCTouch *touch);
+    virtual void touchMoveProcess(cocos2d::CCTouch *touch);
+    virtual void touchEndProcess(cocos2d::CCTouch *touch);
+    
+    virtual void mainUpdate(float time);
+    virtual void mainProcess();
     
     virtual void onEnter();
     virtual void onExit();
@@ -55,14 +63,13 @@ public:
     int isCrosse(cocos2d::CCPoint point);
     void touchEndProcess();
     bool crosseProcess();
-    //设置当前的part
-    void setCurrentPart(int part);
-    //移动到part指定的位置
-    void layerMoveActionWithPart(int part);
-    //设置每部分的尺寸
-    void setPartOfViewSize();
-    //当触摸松开时，层停在哪个部分的位置
-    void partOfViewProcess();
+   
+    void layerMoveActionWithFaceTo(int faceTo);
+    //平滑移动层的逻辑
+    void moveLayerDiferencePosProcess();
+    void moveLayerDiferencePosWithTouchEnd();
+    void moveLayerDiferencePosWithTouchMove(cocos2d::CCTouch *touch);
+    void moveLayerDiferencePosWithTouchBegin();
 };
 
 

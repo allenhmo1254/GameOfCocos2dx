@@ -85,19 +85,18 @@ void ChooseLevelScene::levelButtonPressed(CCObject* pSender)
 
 void ChooseLevelScene::initScrollView()
 {
-    levelScrollView_ = CWAScrollView::create(CCSizeMake(SCREEN_WIDTH * pageNum_, SCREEN_HEIGHT), 3);
-    
-    levelScrollView_ -> addChild(levelButtonLayer_);
+    levelView_ = CWAScrollView::create(CCSizeMake(SCREEN_WIDTH * pageNum_, SCREEN_HEIGHT));
+    levelView_ -> setDirection(CWAScrollViewDirection_Horizontal);
+    levelView_ -> addChild(levelButtonLayer_);
     levelButtonLayer_ -> setAnchorPoint(CCPointZero);
     levelButtonLayer_ -> setPosition(CCPointZero);
 //    levelScrollView_ -> setContentOffset(CCPointZero);
-    levelScrollView_ -> setIsTouchMove(true);
+    levelView_ -> setIsTouchMove(true);
 //    levelScrollView_ -> setDelegate(this);
-    levelScrollView_ -> setDirection(CWAScrollViewDirection_Horizontal);
     
 //    levelScrollView_ -> setContentSize(CCSizeMake(SCREEN_WIDTH * pageNum_, SCREEN_HEIGHT));
     
-    addChild(levelScrollView_);
+    addChild(levelView_);
 }
 
 

@@ -24,4 +24,7 @@ typedef enum{
 }FaceTo;
 
 
+#define MOVEDURATIONTIME               0.2
+
+
 #endif

@@ -9,15 +9,23 @@
 #include "CWAScrollView.h"
 #include "../PublicData/GameData.h"
 
+#define MOVESPEED             20
+#define MOVEASPEED           0.2
+
+
 using namespace cocos2d;
 
 
 CWAScrollView::CWAScrollView()
 :direction_(CWAScrollViewDirectionNone),
 isTouchMoved_(false),
-moveDurationTime_(0),
-partOfScrollView_(0),
-currentPartOfScrollView_(0)
+moveLayerStartPos_(CCPointZero),
+moveLayerEndPos_(CCPointZero),
+moveLayerDifferencePos_(CCPointZero),
+moveLayerSpeed(CCPointZero),
+moveLayeraSpeed(CCPointZero),
+moveHdirection_(0),
+moveVdirection_(0)
 {
     
 }
@@ -29,13 +37,12 @@ CWAScrollView::~CWAScrollView()
 }
 
 
-CWAScrollView* CWAScrollView::create(cocos2d::CCSize contentSize, int partOfView)
+CWAScrollView* CWAScrollView::create(cocos2d::CCSize contentSize)
 {
     CWAScrollView *view = new CWAScrollView();
     if (view && view -> init()) {
         view -> autorelease();
         view -> setContentSize(contentSize);
-        view -> setPartOfScrollView(partOfView);
         return view;
     } else {
         delete view;
@@ -52,15 +59,16 @@ bool CWAScrollView::init()
     }
     
     setAnchorPoint(CCPointZero);
-    moveDurationTime_ = 0.2;
+    schedule(schedule_selector(CWAScrollView::mainUpdate));
     
     return true;
 }
 
 
-void CWAScrollView::setPartOfViewSize()
+
+void CWAScrollView::mainUpdate(float time)
 {
-    
+    mainProcess();
 }
 
 
@@ -80,18 +88,43 @@ void CWAScrollView::onExit()
 
 bool CWAScrollView::ccTouchBegan(CCTouch *pTouch, CCEvent *pEvent)
 {
-    CCDirector::sharedDirector() -> convertToGL(pTouch -> getLocation());
+    touchBeginProcess(pTouch);
     return true;
 }
 
 void CWAScrollView::ccTouchMoved(CCTouch *pTouch, CCEvent *pEvent)
 {
-    layerMoveProcess(pTouch);
+    touchMoveProcess(pTouch);
 }
 
 void CWAScrollView::ccTouchEnded(CCTouch *pTouch, CCEvent *pEvent)
 {
+    touchEndProcess(pTouch);
+}
+
+
+
+void CWAScrollView::touchBeginProcess(CCTouch *touch)
+{
+    moveLayerDiferencePosWithTouchBegin();
+}
+
+
+void CWAScrollView::touchMoveProcess(CCTouch *touch)
+{
+    layerMoveProcess(touch);
+    moveLayerDiferencePosWithTouchMove(touch);
+}
+
+
+void CWAScrollView::touchEndProcess(CCTouch *touch)
+{
     touchEndProcess();
+}
+
+void CWAScrollView::mainProcess()
+{
+    moveLayerDiferencePosProcess();
 }
 
 
@@ -145,37 +178,10 @@ CCPoint CWAScrollView::setMoveRange(CCPoint newPos)
 void CWAScrollView::touchEndProcess()
 {
     if (!crosseProcess()) {
-        partOfViewProcess();
+        moveLayerDiferencePosWithTouchEnd();
     }
 }
 
-
-
-void CWAScrollView::partOfViewProcess()
-{
-    switch (direction_) {
-        case CWAScrollViewDirectionNone:
-            break;
-        case CWAScrollViewDirection_Horizontal:
-        {
-            float partOfViewWidth = this -> getContentSize().width / partOfScrollView_;
-            float temp = abs(this -> getPositionX()) - ((currentPartOfScrollView_ + 1) * partOfViewWidth - partOfViewWidth * 2);
-            if (temp > 0) {
-                setCurrentPart(currentPartOfScrollView_ - 1);
-            } else if (temp < 0){
-                setCurrentPart(currentPartOfScrollView_ + 1);
-            }
-        }
-            break;
-        case CWAScrollViewDirection_Vertical:
-        {
-            float partOfViewHeight = this -> getContentSize().height / partOfScrollView_;
-            int tempPart = this -> getPositionY() / partOfViewHeight;
-            setCurrentPart(abs(tempPart));
-        }
-            break;
-    }
-}
 
 
 
@@ -184,25 +190,17 @@ bool CWAScrollView::crosseProcess()
     switch (direction_) {
         case CWAScrollViewDirectionNone:
             return false;
-        case CWAScrollViewDirection_Horizontal:
-            switch (isCrosse(this -> getPosition())) {
-                case -1:
-                    layerMoveActionWithPart(partOfScrollView_ - 1);
-                    return true;
-                case 1:
-                    layerMoveActionWithPart(0);
-                    return true;
-            }
-            break;
         case CWAScrollViewDirection_Vertical:
-            switch (isCrosse(this -> getPosition())) {
-                case -1:
-                    layerMoveActionWithPart(0);
-                    return true;
-                case 1:
-                    layerMoveActionWithPart(partOfScrollView_ - 1);
-                    return true;
+        case CWAScrollViewDirection_Horizontal:
+        {
+            int faceTo = isCrosse(this -> getPosition());
+            if (faceTo == DIR_NOMOVE) {
+                return false;
+            } else {
+                layerMoveActionWithFaceTo(faceTo);
+                return true;
             }
+        }
             break;
     }
     return false;
@@ -214,21 +212,21 @@ int CWAScrollView::isCrosse(CCPoint point)
 {
     switch (direction_) {
         case CWAScrollViewDirectionNone:
-            return 0;
+            return DIR_NOMOVE;
         case CWAScrollViewDirection_Horizontal:
             if (point.x < SCREEN_WIDTH - this -> getContentSize().width) {
-                return -1;
+                return DIR_LEFT;
             } else if(point.x > 0){
-                return 1;
+                return DIR_RIGHT;
             }
-            return 0;
+            return DIR_NOMOVE;
         case CWAScrollViewDirection_Vertical:
             if (point.y < 0) {
-                return -1;
+                return DIR_DOWN;
             } else if (point.y > SCREEN_HEIGHT - this -> getContentSize().height){
-                return 1;
+                return DIR_UP;
             }
-            return 0;
+            return DIR_NOMOVE;
     }
 }
 
@@ -262,23 +260,53 @@ CCPoint CWAScrollView::setLayerPosition(CCPoint nextPos)
 
 
 
-void CWAScrollView::layerMoveActionWithPart(int part)
+void CWAScrollView::layerMoveActionWithFaceTo(int faceTo)
 {
+    if (faceTo == DIR_NOMOVE) {
+        return;
+    }
+    
     switch (direction_) {
         case CWAScrollViewDirectionNone:
             return;
         case CWAScrollViewDirection_Horizontal:
         {
-            CCPoint point = ccp(this -> getContentSize().width / partOfScrollView_ * part, this -> getPositionY());
-            CCMoveTo *move = CCMoveTo::create(moveDurationTime_, point);
-            runAction(move);
+            switch (faceTo) {
+                case DIR_LEFT:
+                {
+                    CCPoint point = ccp(SCREEN_WIDTH - this -> getContentSize().width, this -> getPositionY());
+                    CCMoveTo *move = CCMoveTo::create(MOVEDURATIONTIME, point);
+                    runAction(move);
+                }
+                    break;
+                case DIR_RIGHT:
+                {
+                    CCPoint point = ccp(0, this -> getPositionY());
+                    CCMoveTo *move = CCMoveTo::create(MOVEDURATIONTIME, point);
+                    runAction(move);
+                }
+                    break;
+            }
         }
             break;
         case CWAScrollViewDirection_Vertical:
         {
-            CCPoint point = ccp(this -> getPositionX(), this -> getContentSize().height / partOfScrollView_ * part);
-            CCMoveTo *move = CCMoveTo::create(moveDurationTime_, point);
-            runAction(move);
+            switch (faceTo) {
+                case DIR_UP:
+                {
+                    CCPoint point = ccp(this -> getPositionX(), 0);
+                    CCMoveTo *move = CCMoveTo::create(MOVEDURATIONTIME, point);
+                    runAction(move);
+                }
+                    break;
+                case DIR_DOWN:
+                {
+                    CCPoint point = ccp(this -> getPositionX(), SCREEN_HEIGHT - this -> getContentSize().height);
+                    CCMoveTo *move = CCMoveTo::create(MOVEDURATIONTIME, point);
+                    runAction(move);
+                }
+                    break;
+            }
         }
             break;
     }
@@ -286,12 +314,94 @@ void CWAScrollView::layerMoveActionWithPart(int part)
 
 
 
-void CWAScrollView::setCurrentPart(int part)
+
+void CWAScrollView::moveLayerDiferencePosWithTouchBegin()
 {
-    if (part < 0 || part >= partOfScrollView_) {
+    moveLayerDifferencePos_ = CCPointZero;
+    isMoveLayer_ = false;
+}
+
+
+void CWAScrollView::moveLayerDiferencePosWithTouchMove(CCTouch *touch)
+{
+    moveLayerEndPos_ = moveLayerStartPos_;
+    moveLayerStartPos_ = touch -> getLocation();
+}
+
+
+
+void CWAScrollView::moveLayerDiferencePosWithTouchEnd()
+{
+    if (!isTouchMoved_) {
         return;
     }
-    currentPartOfScrollView_ = part;
-    layerMoveActionWithPart(currentPartOfScrollView_);
+        moveLayerDifferencePos_ = ccpSub(moveLayerStartPos_, moveLayerEndPos_);
+        if (moveLayerDifferencePos_.x > 0) {
+            moveHdirection_ = DIR_RIGHT;
+        } else if (moveLayerDifferencePos_.x < 0) {
+            moveHdirection_ = DIR_LEFT;
+        } else {
+            moveHdirection_ = DIR_NOMOVE;
+        }
+        if (moveLayerDifferencePos_.y > 0) {
+            moveVdirection_ = DIR_DOWN;
+        } else if (moveLayerDifferencePos_.y < 0) {
+            moveVdirection_ = DIR_UP;
+        } else {
+            moveVdirection_ = DIR_NOMOVE;
+        }
+        moveLayerSpeed = ccp(abs(moveLayerDifferencePos_.x), abs(moveLayerDifferencePos_.y));
+        moveLayerSpeed.x = moveLayerSpeed.x > MOVESPEED ? MOVESPEED : moveLayerSpeed.x;
+        moveLayerSpeed.y = moveLayerSpeed.y > MOVESPEED ? MOVESPEED : moveLayerSpeed.y;
+        moveLayeraSpeed = ccp(MOVEASPEED, MOVEASPEED);
+        isMoveLayer_ = true;
 }
+
+int direction[5] = {0, 1, -1, -1, 1};
+
+void CWAScrollView::moveLayerDiferencePosProcess()
+{
+    if (!isMoveLayer_) {
+        return;
+    }
+    
+    switch (direction_) {
+        case CWAScrollViewDirectionNone:
+            break;
+        case CWAScrollViewDirection_Horizontal:
+            if (moveHdirection_ != DIR_NOMOVE) {
+                setPosition(ccp(this -> getPositionX() + direction[moveHdirection_] * moveLayerSpeed.x, this -> getPositionY()));
+                moveLayerSpeed = ccp(moveLayerSpeed.x - moveLayeraSpeed.x, moveLayerSpeed.y);
+                moveLayerSpeed.x = moveLayerSpeed.x < 0 ? 0 : moveLayerSpeed.x;
+                int faceTo = isCrosse(this -> getPosition());
+                if (faceTo != DIR_NOMOVE) {
+                    isMoveLayer_ = false;
+                    layerMoveActionWithFaceTo(faceTo);
+                } else {
+                    if (moveLayerSpeed.x == 0) {
+                        isMoveLayer_ = false;
+                    }
+                }
+            }
+            break;
+        case CWAScrollViewDirection_Vertical:
+            if (moveVdirection_ != DIR_NOMOVE) {
+                setPosition(ccp(this -> getPositionX(), this -> getPositionY() + direction[moveVdirection_] * moveLayerSpeed.y));
+                moveLayerSpeed = ccp(moveLayerSpeed.x, moveLayerSpeed.y - moveLayeraSpeed.y);
+                moveLayerSpeed.y = moveLayerSpeed.y < 0 ? 0 : moveLayerSpeed.y;
+                int faceTo = isCrosse(this -> getPosition());
+                if (faceTo != DIR_NOMOVE) {
+                    isMoveLayer_ = false;
+                    layerMoveActionWithFaceTo(faceTo);
+                } else {
+                    if (moveLayerSpeed.y == 0) {
+                        isMoveLayer_ = false;
+                    }
+                }
+            }
+            break;
+    }
+}
+
+
 
