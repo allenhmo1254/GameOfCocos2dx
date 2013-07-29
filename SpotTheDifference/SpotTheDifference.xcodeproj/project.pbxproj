@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1D36B05D17A6C34F00A3E50A /* CWAScrollView.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1D36B05917A6C34F00A3E50A /* CWAScrollView.cpp */; };
+		1D36B05E17A6C34F00A3E50A /* CWATableView.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1D36B05B17A6C34F00A3E50A /* CWATableView.cpp */; };
+		1D36B09617A6C44E00A3E50A /* CWACollectionView.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1D36B09417A6C44E00A3E50A /* CWACollectionView.cpp */; };
 		1DBD74BF17981CD8005CEED6 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DBD74BE17981CD8005CEED6 /* QuartzCore.framework */; };
 		1DBD74C117981CD8005CEED6 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DBD74C017981CD8005CEED6 /* OpenGLES.framework */; };
 		1DBD74C317981CD8005CEED6 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DBD74C217981CD8005CEED6 /* OpenAL.framework */; };
@@ -295,11 +298,15 @@
 		F0D87F8617A0B6DF00A5D3A7 /* CCDirector+DtTime.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F0D87F8517A0B6DF00A5D3A7 /* CCDirector+DtTime.cpp */; };
 		F0D87F9217A0C42900A5D3A7 /* GamePlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F0D87F8E17A0C42900A5D3A7 /* GamePlayer.cpp */; };
 		F0D87F9317A0C42900A5D3A7 /* GameRole.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F0D87F9017A0C42900A5D3A7 /* GameRole.cpp */; };
-		F0D87F9617A0D33300A5D3A7 /* CWAScrollView.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F0D87F9417A0D33300A5D3A7 /* CWAScrollView.cpp */; };
-		F0DF7C7C17A4ED5A002BE7E8 /* CWATableView.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F0DF7C7A17A4ED5A002BE7E8 /* CWATableView.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1D36B05917A6C34F00A3E50A /* CWAScrollView.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CWAScrollView.cpp; sourceTree = "<group>"; };
+		1D36B05A17A6C34F00A3E50A /* CWAScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CWAScrollView.h; sourceTree = "<group>"; };
+		1D36B05B17A6C34F00A3E50A /* CWATableView.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CWATableView.cpp; sourceTree = "<group>"; };
+		1D36B05C17A6C34F00A3E50A /* CWATableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CWATableView.h; sourceTree = "<group>"; };
+		1D36B09417A6C44E00A3E50A /* CWACollectionView.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CWACollectionView.cpp; sourceTree = "<group>"; };
+		1D36B09517A6C44E00A3E50A /* CWACollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CWACollectionView.h; sourceTree = "<group>"; };
 		1DBD74BB17981CD8005CEED6 /* SpotTheDifference.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpotTheDifference.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DBD74BE17981CD8005CEED6 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		1DBD74C017981CD8005CEED6 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -917,10 +924,6 @@
 		F0D87F8F17A0C42900A5D3A7 /* GamePlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GamePlayer.h; sourceTree = "<group>"; };
 		F0D87F9017A0C42900A5D3A7 /* GameRole.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameRole.cpp; sourceTree = "<group>"; };
 		F0D87F9117A0C42900A5D3A7 /* GameRole.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameRole.h; sourceTree = "<group>"; };
-		F0D87F9417A0D33300A5D3A7 /* CWAScrollView.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CWAScrollView.cpp; sourceTree = "<group>"; };
-		F0D87F9517A0D33300A5D3A7 /* CWAScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CWAScrollView.h; sourceTree = "<group>"; };
-		F0DF7C7A17A4ED5A002BE7E8 /* CWATableView.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CWATableView.cpp; sourceTree = "<group>"; };
-		F0DF7C7B17A4ED5A002BE7E8 /* CWATableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CWATableView.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -944,6 +947,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1D36B05817A6C34F00A3E50A /* BaseView */ = {
+			isa = PBXGroup;
+			children = (
+				1D36B05917A6C34F00A3E50A /* CWAScrollView.cpp */,
+				1D36B05A17A6C34F00A3E50A /* CWAScrollView.h */,
+				1D36B05B17A6C34F00A3E50A /* CWATableView.cpp */,
+				1D36B05C17A6C34F00A3E50A /* CWATableView.h */,
+				1D36B09417A6C44E00A3E50A /* CWACollectionView.cpp */,
+				1D36B09517A6C44E00A3E50A /* CWACollectionView.h */,
+			);
+			path = BaseView;
+			sourceTree = "<group>";
+		};
 		1DBD74B217981CD8005CEED6 = {
 			isa = PBXGroup;
 			children = (
@@ -2091,14 +2107,11 @@
 		1DBD784E179822F3005CEED6 /* UiScene */ = {
 			isa = PBXGroup;
 			children = (
+				1D36B05817A6C34F00A3E50A /* BaseView */,
 				1DBD784F179822F3005CEED6 /* ChooseLevelScene.cpp */,
 				1DBD7850179822F3005CEED6 /* ChooseLevelScene.h */,
 				1DBD7860179825EB005CEED6 /* ChooseGameScene.cpp */,
 				1DBD7861179825EB005CEED6 /* ChooseGameScene.h */,
-				F0D87F9417A0D33300A5D3A7 /* CWAScrollView.cpp */,
-				F0D87F9517A0D33300A5D3A7 /* CWAScrollView.h */,
-				F0DF7C7A17A4ED5A002BE7E8 /* CWATableView.cpp */,
-				F0DF7C7B17A4ED5A002BE7E8 /* CWATableView.h */,
 			);
 			name = UiScene;
 			path = Classes/UiScene;
@@ -2540,8 +2553,9 @@
 				F0D87F8617A0B6DF00A5D3A7 /* CCDirector+DtTime.cpp in Sources */,
 				F0D87F9217A0C42900A5D3A7 /* GamePlayer.cpp in Sources */,
 				F0D87F9317A0C42900A5D3A7 /* GameRole.cpp in Sources */,
-				F0D87F9617A0D33300A5D3A7 /* CWAScrollView.cpp in Sources */,
-				F0DF7C7C17A4ED5A002BE7E8 /* CWATableView.cpp in Sources */,
+				1D36B05D17A6C34F00A3E50A /* CWAScrollView.cpp in Sources */,
+				1D36B05E17A6C34F00A3E50A /* CWATableView.cpp in Sources */,
+				1D36B09617A6C44E00A3E50A /* CWACollectionView.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

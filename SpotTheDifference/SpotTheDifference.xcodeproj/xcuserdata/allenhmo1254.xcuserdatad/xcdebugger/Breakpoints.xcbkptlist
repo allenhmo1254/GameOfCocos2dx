@@ -38,9 +38,7 @@
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "141"
-         endingLineNumber = "141"
-         landmarkName = "GameSprite::checkDifferentSprite(CCPoint pos)"
-         landmarkType = "5">
+         endingLineNumber = "141">
       </FileBreakpoint>
    </FileBreakpoints>
 </Bucket>
