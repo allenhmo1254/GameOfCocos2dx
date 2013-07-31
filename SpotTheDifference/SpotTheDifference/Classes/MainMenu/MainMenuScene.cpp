@@ -7,7 +7,7 @@
 //
 
 #include "MainMenuScene.h"
-#include "../UiScene/ChooseLevelScene.h"
+#include "../UiScene/ChooseLevelScene/ChooseLevelScene.h"
 #include "../Game/GameScene.h"
 
 using namespace cocos2d;

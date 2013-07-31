@@ -7,7 +7,9 @@
 //
 
 #include "ChooseLevelScene.h"
-#include "../PublicData/GameData.h"
+#include "../../PublicData/GameData.h"
+#include "../ChooseGameScene/ChooseGameScene.h"
+#include "../../MainMenu/MainMenuScene.h"
 
 using namespace cocos2d;
 using namespace extension;
@@ -38,10 +40,14 @@ bool ChooseLevelScene::init()
     {
         return false;
     }
+    
+    manager_ = ChooseLevelSceneManager::sharedChooseLevelSceneManager();
+    
     pageNum_ = 3;
     
     initLevelButton();
     initScrollView();
+    initReturnButton();
     
     
     return true;
@@ -75,40 +81,33 @@ void ChooseLevelScene::initLevelButton()
 
 
 
-void ChooseLevelScene::levelButtonPressed(CCObject* pSender)
-{
-    CCMenuItemImage *image = (CCMenuItemImage *)pSender;
-    CCLOG("image -> getTag() = %d",image -> getTag());
-}
-
 
 
 void ChooseLevelScene::initScrollView()
 {
-    levelView_ = CWAScrollView::create(CCSizeMake(SCREEN_WIDTH * pageNum_, SCREEN_HEIGHT));
-    levelView_ -> setDirection(CWAScrollViewDirection_Horizontal);
+    levelView_ = CWATableView::create(CWAScrollViewDirection_Horizontal, 3);
     levelView_ -> addChild(levelButtonLayer_);
     levelButtonLayer_ -> setAnchorPoint(CCPointZero);
     levelButtonLayer_ -> setPosition(CCPointZero);
-//    levelScrollView_ -> setContentOffset(CCPointZero);
     levelView_ -> setIsTouchMove(true);
-//    levelScrollView_ -> setDelegate(this);
-    
-//    levelScrollView_ -> setContentSize(CCSizeMake(SCREEN_WIDTH * pageNum_, SCREEN_HEIGHT));
+    levelView_ -> setTableViewDelegate(this);
     
     addChild(levelView_);
 }
 
 
-void ChooseLevelScene::scrollViewDidScroll(CCScrollView* view)
+void ChooseLevelScene::initReturnButton()
 {
-//    CCLOG("scrollViewDidScroll");
+    CCMenuItemImage *returnButton = CCMenuItemImage::create("Icon.png", "Icon.png", this, menu_selector(ChooseLevelScene::returnButtonPressed));
+    returnButton -> setAnchorPoint(ccp(1.0, 1.0));
+    returnButton -> setPosition(ccp(SCREEN_WIDTH - 50, SCREEN_HEIGHT - 50));
+    CCMenu *staticButtonLayer = CCMenu::create(returnButton, NULL);
+    addChild(staticButtonLayer);
+    staticButtonLayer -> setAnchorPoint(CCPointZero);
+    staticButtonLayer -> setPosition(CCPointZero);
 }
 
-void ChooseLevelScene::scrollViewDidZoom(CCScrollView* view)
-{
-//     CCLOG("scrollViewDidZoom");
-}
+
 
 bool ChooseLevelScene::ccTouchBegan(CCTouch *pTouch, CCEvent *pEvent)
 {
@@ -148,5 +147,26 @@ void ChooseLevelScene::moveScrollView(FaceTo faceTo)
     
     CCPoint  movePos = ccp(origin.x - visibleSize.width * currnetPage_, 0);
 //    levelScrollView_ -> setContentOffset(movePos, true);
+}
+
+
+void ChooseLevelScene::levelButtonPressed(CCObject* pSender)
+{
+    CCMenuItemImage *image = (CCMenuItemImage *)pSender;
+    CCLOG("image -> getTag() = %d",image -> getTag());
+    CCDirector::sharedDirector() -> replaceScene(ChooseGameScene::scene());
+}
+
+
+
+void ChooseLevelScene::tableViewRunFinishProcess(int currentPartOfView)
+{
+    CCLOG("currentPartOfView = %d",currentPartOfView);
+}
+
+
+void ChooseLevelScene::returnButtonPressed(CCObject* pSender)
+{
+    CCDirector::sharedDirector() -> replaceScene(MainMenuScene::scene());
 }
 

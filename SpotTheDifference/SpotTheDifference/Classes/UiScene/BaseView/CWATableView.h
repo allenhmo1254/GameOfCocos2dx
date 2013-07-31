@@ -12,6 +12,15 @@
 #include <iostream>
 #include "CWAScrollView.h"
 
+
+class CWATableViewProtocol {
+public:
+    virtual void tableViewRunFinishProcess(int currentPartOfView) = 0;
+};
+
+
+
+
 class CWATableView : public CWAScrollView {
 protected:
     int currentPartOfView_;     //当前部分
@@ -20,6 +29,7 @@ protected:
 public:
     CC_SYNTHESIZE(cocos2d::CCSize, partOfViewSize_, PartOfViewSize);
     CC_SYNTHESIZE(int, partOfView_, PartOfView);//一共有几个部分
+    CC_SYNTHESIZE(CWATableViewProtocol *, tableViewDelegate_, TableViewDelegate)
 public:
     CWATableView();
     ~CWATableView();
@@ -56,6 +66,9 @@ public:
     void touchEndProcessWithPoint(cocos2d::CCPoint point);
     
     bool checkTouchdistance(cocos2d::CCTouch *touch);
+    
+    void moveActionWithPos(cocos2d::CCPoint point);
+    void actionFinishProcess();
 };
 
 #endif /* defined(__SpotTheDifference__CWATableView__) */

@@ -269,15 +269,18 @@
 		1DBD782C17981CDF005CEED6 /* cpVect.c in Sources */ = {isa = PBXBuildFile; fileRef = 1DBD782B17981CDF005CEED6 /* cpVect.c */; };
 		1DBD783317981CDF005CEED6 /* AppDelegate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1DBD783217981CDF005CEED6 /* AppDelegate.cpp */; };
 		1DBD7851179822F3005CEED6 /* MainMenuScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1DBD784C179822F3005CEED6 /* MainMenuScene.cpp */; };
-		1DBD7852179822F3005CEED6 /* ChooseLevelScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1DBD784F179822F3005CEED6 /* ChooseLevelScene.cpp */; };
 		1DBD78591798240A005CEED6 /* GameConstant.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1DBD78571798240A005CEED6 /* GameConstant.cpp */; };
 		1DBD785C17982421005CEED6 /* GameUtil.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1DBD785A17982421005CEED6 /* GameUtil.cpp */; };
 		1DBD785F17982485005CEED6 /* GameScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1DBD785D17982485005CEED6 /* GameScene.cpp */; };
-		1DBD7862179825EB005CEED6 /* ChooseGameScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1DBD7860179825EB005CEED6 /* ChooseGameScene.cpp */; };
 		1DBD786517982868005CEED6 /* GameSceneManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1DBD786317982868005CEED6 /* GameSceneManager.cpp */; };
 		1DBD7868179829B0005CEED6 /* PublicDataManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1DBD7866179829B0005CEED6 /* PublicDataManager.cpp */; };
 		1DD1743B179D71EF00A67344 /* GameSprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1DD17439179D71EF00A67344 /* GameSprite.cpp */; };
 		1DD1743E179D806F00A67344 /* DifferentSprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1DD1743C179D806E00A67344 /* DifferentSprite.cpp */; };
+		1DE0B1DE17A95DD300E31468 /* ChooseGameScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1DE0B1D717A95DD300E31468 /* ChooseGameScene.cpp */; };
+		1DE0B1DF17A95DD300E31468 /* ChooseLevelScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1DE0B1DA17A95DD300E31468 /* ChooseLevelScene.cpp */; };
+		1DE0B1E017A95DD300E31468 /* ChooseLevelSceneManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1DE0B1DC17A95DD300E31468 /* ChooseLevelSceneManager.cpp */; };
+		1DE0B1E317A95DFD00E31468 /* ChooseGameSceneManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1DE0B1E117A95DFD00E31468 /* ChooseGameSceneManager.cpp */; };
+		1DE0B1EA17A96B6E00E31468 /* ChooseGameLinkGame.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1DE0B1E817A96B6E00E31468 /* ChooseGameLinkGame.cpp */; };
 		E577204F1798D1A200ACA9A2 /* ClassCreate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E57720471798D1A200ACA9A2 /* ClassCreate.cpp */; };
 		E57720501798D1A200ACA9A2 /* ClassInclude.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E57720491798D1A200ACA9A2 /* ClassInclude.cpp */; };
 		E57720511798D1A200ACA9A2 /* Define.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E577204B1798D1A200ACA9A2 /* Define.cpp */; };
@@ -870,8 +873,6 @@
 		1DBD783217981CDF005CEED6 /* AppDelegate.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = AppDelegate.cpp; path = Classes/AppDelegate.cpp; sourceTree = "<group>"; };
 		1DBD784C179822F3005CEED6 /* MainMenuScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MainMenuScene.cpp; sourceTree = "<group>"; };
 		1DBD784D179822F3005CEED6 /* MainMenuScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainMenuScene.h; sourceTree = "<group>"; };
-		1DBD784F179822F3005CEED6 /* ChooseLevelScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ChooseLevelScene.cpp; sourceTree = "<group>"; };
-		1DBD7850179822F3005CEED6 /* ChooseLevelScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseLevelScene.h; sourceTree = "<group>"; };
 		1DBD7856179823EC005CEED6 /* GameData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameData.h; sourceTree = "<group>"; };
 		1DBD78571798240A005CEED6 /* GameConstant.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameConstant.cpp; sourceTree = "<group>"; };
 		1DBD78581798240A005CEED6 /* GameConstant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameConstant.h; sourceTree = "<group>"; };
@@ -879,8 +880,6 @@
 		1DBD785B17982421005CEED6 /* GameUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameUtil.h; sourceTree = "<group>"; };
 		1DBD785D17982485005CEED6 /* GameScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameScene.cpp; sourceTree = "<group>"; };
 		1DBD785E17982485005CEED6 /* GameScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameScene.h; sourceTree = "<group>"; };
-		1DBD7860179825EB005CEED6 /* ChooseGameScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ChooseGameScene.cpp; sourceTree = "<group>"; };
-		1DBD7861179825EB005CEED6 /* ChooseGameScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseGameScene.h; sourceTree = "<group>"; };
 		1DBD786317982868005CEED6 /* GameSceneManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameSceneManager.cpp; sourceTree = "<group>"; };
 		1DBD786417982868005CEED6 /* GameSceneManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameSceneManager.h; sourceTree = "<group>"; };
 		1DBD7866179829B0005CEED6 /* PublicDataManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PublicDataManager.cpp; sourceTree = "<group>"; };
@@ -890,6 +889,16 @@
 		1DD1743A179D71EF00A67344 /* GameSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameSprite.h; sourceTree = "<group>"; };
 		1DD1743C179D806E00A67344 /* DifferentSprite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DifferentSprite.cpp; sourceTree = "<group>"; };
 		1DD1743D179D806F00A67344 /* DifferentSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DifferentSprite.h; sourceTree = "<group>"; };
+		1DE0B1D717A95DD300E31468 /* ChooseGameScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ChooseGameScene.cpp; sourceTree = "<group>"; };
+		1DE0B1D817A95DD300E31468 /* ChooseGameScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseGameScene.h; sourceTree = "<group>"; };
+		1DE0B1DA17A95DD300E31468 /* ChooseLevelScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ChooseLevelScene.cpp; sourceTree = "<group>"; };
+		1DE0B1DB17A95DD300E31468 /* ChooseLevelScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseLevelScene.h; sourceTree = "<group>"; };
+		1DE0B1DC17A95DD300E31468 /* ChooseLevelSceneManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ChooseLevelSceneManager.cpp; sourceTree = "<group>"; };
+		1DE0B1DD17A95DD300E31468 /* ChooseLevelSceneManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseLevelSceneManager.h; sourceTree = "<group>"; };
+		1DE0B1E117A95DFD00E31468 /* ChooseGameSceneManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ChooseGameSceneManager.cpp; sourceTree = "<group>"; };
+		1DE0B1E217A95DFD00E31468 /* ChooseGameSceneManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseGameSceneManager.h; sourceTree = "<group>"; };
+		1DE0B1E817A96B6E00E31468 /* ChooseGameLinkGame.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ChooseGameLinkGame.cpp; sourceTree = "<group>"; };
+		1DE0B1E917A96B6E00E31468 /* ChooseGameLinkGame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseGameLinkGame.h; sourceTree = "<group>"; };
 		E57720461798D1A100ACA9A2 /* ClassByName.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClassByName.h; sourceTree = "<group>"; };
 		E57720471798D1A200ACA9A2 /* ClassCreate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ClassCreate.cpp; sourceTree = "<group>"; };
 		E57720481798D1A200ACA9A2 /* ClassCreate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClassCreate.h; sourceTree = "<group>"; };
@@ -2107,11 +2116,9 @@
 		1DBD784E179822F3005CEED6 /* UiScene */ = {
 			isa = PBXGroup;
 			children = (
+				1DE0B1D617A95DD300E31468 /* ChooseGameScene */,
+				1DE0B1D917A95DD300E31468 /* ChooseLevelScene */,
 				1D36B05817A6C34F00A3E50A /* BaseView */,
-				1DBD784F179822F3005CEED6 /* ChooseLevelScene.cpp */,
-				1DBD7850179822F3005CEED6 /* ChooseLevelScene.h */,
-				1DBD7860179825EB005CEED6 /* ChooseGameScene.cpp */,
-				1DBD7861179825EB005CEED6 /* ChooseGameScene.h */,
 			);
 			name = UiScene;
 			path = Classes/UiScene;
@@ -2137,6 +2144,7 @@
 		1DBD78541798237C005CEED6 /* PublicData */ = {
 			isa = PBXGroup;
 			children = (
+				1DE0B1E417A96B0100E31468 /* Link */,
 				E577205D1798E78300ACA9A2 /* CCRange.h */,
 				1DBD7856179823EC005CEED6 /* GameData.h */,
 				1DBD78571798240A005CEED6 /* GameConstant.cpp */,
@@ -2169,6 +2177,37 @@
 			);
 			name = Util;
 			path = Classes/Util;
+			sourceTree = "<group>";
+		};
+		1DE0B1D617A95DD300E31468 /* ChooseGameScene */ = {
+			isa = PBXGroup;
+			children = (
+				1DE0B1D717A95DD300E31468 /* ChooseGameScene.cpp */,
+				1DE0B1D817A95DD300E31468 /* ChooseGameScene.h */,
+				1DE0B1E117A95DFD00E31468 /* ChooseGameSceneManager.cpp */,
+				1DE0B1E217A95DFD00E31468 /* ChooseGameSceneManager.h */,
+			);
+			path = ChooseGameScene;
+			sourceTree = "<group>";
+		};
+		1DE0B1D917A95DD300E31468 /* ChooseLevelScene */ = {
+			isa = PBXGroup;
+			children = (
+				1DE0B1DA17A95DD300E31468 /* ChooseLevelScene.cpp */,
+				1DE0B1DB17A95DD300E31468 /* ChooseLevelScene.h */,
+				1DE0B1DC17A95DD300E31468 /* ChooseLevelSceneManager.cpp */,
+				1DE0B1DD17A95DD300E31468 /* ChooseLevelSceneManager.h */,
+			);
+			path = ChooseLevelScene;
+			sourceTree = "<group>";
+		};
+		1DE0B1E417A96B0100E31468 /* Link */ = {
+			isa = PBXGroup;
+			children = (
+				1DE0B1E817A96B6E00E31468 /* ChooseGameLinkGame.cpp */,
+				1DE0B1E917A96B6E00E31468 /* ChooseGameLinkGame.h */,
+			);
+			path = Link;
 			sourceTree = "<group>";
 		};
 		E57720451798D1A100ACA9A2 /* Define */ = {
@@ -2532,11 +2571,9 @@
 				1DBD782C17981CDF005CEED6 /* cpVect.c in Sources */,
 				1DBD783317981CDF005CEED6 /* AppDelegate.cpp in Sources */,
 				1DBD7851179822F3005CEED6 /* MainMenuScene.cpp in Sources */,
-				1DBD7852179822F3005CEED6 /* ChooseLevelScene.cpp in Sources */,
 				1DBD78591798240A005CEED6 /* GameConstant.cpp in Sources */,
 				1DBD785C17982421005CEED6 /* GameUtil.cpp in Sources */,
 				1DBD785F17982485005CEED6 /* GameScene.cpp in Sources */,
-				1DBD7862179825EB005CEED6 /* ChooseGameScene.cpp in Sources */,
 				1DBD786517982868005CEED6 /* GameSceneManager.cpp in Sources */,
 				1DBD7868179829B0005CEED6 /* PublicDataManager.cpp in Sources */,
 				E577204F1798D1A200ACA9A2 /* ClassCreate.cpp in Sources */,
@@ -2556,6 +2593,11 @@
 				1D36B05D17A6C34F00A3E50A /* CWAScrollView.cpp in Sources */,
 				1D36B05E17A6C34F00A3E50A /* CWATableView.cpp in Sources */,
 				1D36B09617A6C44E00A3E50A /* CWACollectionView.cpp in Sources */,
+				1DE0B1DE17A95DD300E31468 /* ChooseGameScene.cpp in Sources */,
+				1DE0B1DF17A95DD300E31468 /* ChooseLevelScene.cpp in Sources */,
+				1DE0B1E017A95DD300E31468 /* ChooseLevelSceneManager.cpp in Sources */,
+				1DE0B1E317A95DFD00E31468 /* ChooseGameSceneManager.cpp in Sources */,
+				1DE0B1EA17A96B6E00E31468 /* ChooseGameLinkGame.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

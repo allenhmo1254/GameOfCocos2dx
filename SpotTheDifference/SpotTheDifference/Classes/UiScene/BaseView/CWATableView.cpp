@@ -7,7 +7,7 @@
 //
 
 #include "CWATableView.h"
-#include "../PublicData/GameData.h"
+#include "../../PublicData/GameData.h"
 
 using namespace cocos2d;
 
@@ -158,18 +158,36 @@ void CWATableView::layerMoveActionWithPart(int part)
             break;
         case CWAScrollViewDirection_Horizontal:
         {
-            CCMoveTo *move = CCMoveTo::create(MOVEDURATIONTIME, ccp(-part * partOfViewSize_.width, 0));
-            runAction(move);
+            moveActionWithPos(ccp(-part * partOfViewSize_.width, 0));
         }
             break;
         case CWAScrollViewDirection_Vertical:
         {
-            CCMoveTo *move = CCMoveTo::create(MOVEDURATIONTIME, ccp(0, part * partOfViewSize_.height));
-            runAction(move);
+            moveActionWithPos(ccp(0, part * partOfViewSize_.height));
         }
             break;
     }
 }
+
+
+
+void CWATableView::moveActionWithPos(CCPoint point)
+{
+    CCMoveTo *move = CCMoveTo::create(MOVEDURATIONTIME, point);
+    CCCallFunc *call = CCCallFunc::create(this, callfunc_selector(CWATableView::actionFinishProcess));
+    CCSequence *seq = CCSequence::create(move, call, NULL);
+    runAction(seq);
+}
+
+
+void CWATableView::actionFinishProcess()
+{
+    if (tableViewDelegate_) {
+        tableViewDelegate_ -> tableViewRunFinishProcess(currentPartOfView_);
+    }
+}
+
+
 
 //设置每部分的尺寸
 void CWATableView::setPartOfViewSize()

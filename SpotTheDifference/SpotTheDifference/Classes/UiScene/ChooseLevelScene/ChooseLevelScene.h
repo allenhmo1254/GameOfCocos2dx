@@ -12,21 +12,22 @@
 #include <iostream>
 #include "cocos2d.h"
 #include "cocos-ext.h"
-#include "../PublicData/GameData.h"
-//#include "CWATableView.h"
-#include "CWAScrollView.h"
+#include "../../PublicData/GameData.h"
+#include "../BaseView/CWATableView.h"
+#include "ChooseLevelSceneManager.h"
 
 USING_NS_CC;
 USING_NS_CC_EXT;
 
 
-class ChooseLevelScene : public cocos2d::CCLayer
+class ChooseLevelScene : public cocos2d::CCLayer, public CWATableViewProtocol
 {
 private:
     CCMenu *levelButtonLayer_;
-    CWAScrollView *levelView_;
+    CWATableView *levelView_;
     int currnetPage_;
     CCPoint touchBeginPos_;
+    ChooseLevelSceneManager *manager_;
 public:
     CC_SYNTHESIZE(int, pageNum_, PageNum);
 public:
@@ -45,8 +46,7 @@ public:
     void onExit();
     //初始化ScrollView
     void initScrollView();
-	void scrollViewDidScroll(CCScrollView* view);
-	void scrollViewDidZoom(CCScrollView* view);
+    void initReturnButton();
     //移动ScrollView
     void moveScrollView(FaceTo faceTo);
     //当前层的触摸
@@ -55,6 +55,10 @@ public:
 	virtual void ccTouchEnded(CCTouch *pTouch, CCEvent *pEvent);
     //按钮回调函数
     void levelButtonPressed(CCObject* pSender);
+    void returnButtonPressed(CCObject* pSender);
+    
+    virtual void tableViewRunFinishProcess(int currentPartOfView);
+    
     
 };
 

@@ -12,9 +12,7 @@
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "63"
-         endingLineNumber = "63"
-         landmarkName = "GameSceneManager::setGameSpriteShowCircle(int index)"
-         landmarkType = "5">
+         endingLineNumber = "63">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "Yes"
@@ -25,9 +23,7 @@
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "77"
-         endingLineNumber = "77"
-         landmarkName = "GameSceneManager::gameSpriteTouchPressed(int index)"
-         landmarkType = "5">
+         endingLineNumber = "77">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "Yes"
